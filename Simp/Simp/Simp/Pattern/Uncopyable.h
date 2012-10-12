@@ -1,0 +1,32 @@
+////////////////////////////////////////////////////////////////////////////////
+// 文    件 : Uncopyable.h
+// 功能说明 :
+//   禁止拷贝基类
+//
+// 版    本 : 1.0
+// 作    者 : Breaker Zhao <breaker.zy_AT_gmail>
+// 日    期 : 2011-10
+// 授权许可 : Microsoft Public License <http://www.microsoft.com/en-us/openness/licenses.aspx#MPL>
+////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+#include <Simp/Defs.h>
+
+SIMP_NS_BEGIN
+
+////////////////////////////////////////////////////////////////////////////////
+// 禁止拷贝基类 Uncopyable
+////////////////////////////////////////////////////////////////////////////////
+
+class Uncopyable {
+protected:
+    Uncopyable() {}
+    ~Uncopyable() {}
+private:
+    // 禁止拷贝
+    Uncopyable(const Uncopyable&);
+    Uncopyable& operator=(const Uncopyable&);
+};
+
+SIMP_NS_END

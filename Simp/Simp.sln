@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpTest", "SimpTest\SimpTest.vcproj", "{A07D0AF9-0186-473D-90D9-B4FAFC09741B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Simp", "Simp\Simp.vcproj", "{81510650-23DD-4C80-9699-179AFB1F2E33}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A07D0AF9-0186-473D-90D9-B4FAFC09741B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A07D0AF9-0186-473D-90D9-B4FAFC09741B}.Debug|Win32.Build.0 = Debug|Win32
+		{A07D0AF9-0186-473D-90D9-B4FAFC09741B}.Release|Win32.ActiveCfg = Release|Win32
+		{A07D0AF9-0186-473D-90D9-B4FAFC09741B}.Release|Win32.Build.0 = Release|Win32
+		{81510650-23DD-4C80-9699-179AFB1F2E33}.Debug|Win32.ActiveCfg = Debug|Win32
+		{81510650-23DD-4C80-9699-179AFB1F2E33}.Debug|Win32.Build.0 = Debug|Win32
+		{81510650-23DD-4C80-9699-179AFB1F2E33}.Release|Win32.ActiveCfg = Release|Win32
+		{81510650-23DD-4C80-9699-179AFB1F2E33}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

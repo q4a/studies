@@ -1,0 +1,14 @@
+////////////////////////////////////////////////////////////////////////////////
+// 文    件 : Debug.h
+// 功能说明 :
+//   调试功能
+//
+// 版    本 : 1.0
+// 作    者 : Breaker Zhao <breaker.zy_AT_gmail>
+// 日    期 : 2011-10
+// 授权许可 : Microsoft Public License <http://www.microsoft.com/en-us/openness/licenses.aspx#MPL>
+////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+#include <Simp/Debug/DbgOut.h>

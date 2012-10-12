@@ -1,0 +1,5 @@
+CAUTION:
+
+Simp is a header-only library, please keep .cpp has no functional code.
+
+The only purpose of .cpp is to check compiling and self-sufficient of .h.
