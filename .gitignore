@@ -1,12 +1,48 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
+####################
+# Mac OS X
+####################
 
-# Compiled Dynamic libraries
-*.so
+*.DS_Store
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
+####################
+# Windows
+####################
+
+[Tt]humbs.db
+[Dd]esktop.ini
+
+####################
+# Visual Studio
+####################
+
+*.[Oo]bj
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.[Cc]ache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.sdf
+*.opensdf
+*.unsuccessfulbuild
+ipch/
+obj/
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
+Ankh.NoLoad
+
+# visual studio database projects
+*.dbmdl
