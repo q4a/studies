@@ -1,0 +1,3 @@
+BuoyTemperature     AverageTemperature:Float    TemperatureRange:Float  SampleNumber:Int    Location:String     MeasureTime:Time
+BuoyDrift           LatitudeChange:Float        LongitudeChange:Float   MeasureTime:Time
+BuoyLocation        Latitude:Float              Longitude:Float         Depth:Float         MeasureTime:Time
