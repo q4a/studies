@@ -165,7 +165,7 @@ public:
 
     // À©Õ¹ÄÚ´æ
     void Expand(double ratio) {
-        return Realloc(m_Size + (size_t) (m_Size * ratio));
+        return Realloc(m_Size + (size_t) (m_Size * Max(ratio, MIN_REALLOCRATIO)));
     }
     void Expand() {
         return Realloc(m_Size + (m_Size >> 1));
@@ -211,10 +211,16 @@ public:
         m_Size = sz;
     }
 
+public:
+    static const double MIN_REALLOCRATIO;
+
 private:
     Type*       m_Buf;
     size_t      m_Size;
     Allocator   m_Alloc;
 };
+
+template <typename _Type, typename _Allocator>
+const double ScopedBuf<_Type, _Allocator>::MIN_REALLOCRATIO = 0.01;
 
 SIMP_NS_END

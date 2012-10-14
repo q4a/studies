@@ -46,12 +46,12 @@ SIMP_NS_BEGIN
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////
-// 全局变量
+// 全局量
 ////////////////////////////////////////////////////////////////////////////////
 
 // 对于 MbsToWcs 为已转换的字符个数
 // 对于 WcsToMbs 为已转换的字节数
-static size_t NumConverted;
+SIMP_GLOBAL size_t NumConverted;
 
 ////////////////////////////////////////////////////////////////////////////////
 // MBCS/Unicode 转换函数
@@ -320,5 +320,46 @@ inline
 const _TCHAR* ToTchar(const std::wstring& wcstr, __out _TCHAR (&tchar)[SizeTchar], _locale_t loc = NULL) {
     return ToTchar(wcstr.c_str(), tchar, SizeTchar, loc);
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// 类模板 TcharConverter
+// 在类成员中为 ToTchar 转换后的 _TCHAR 字符串提供存储
+// 用途:
+//   利用临时对象的语句结束时销毁机制, 在一个表达式转换为 _TCHAR 时, 不用考虑分配和销毁 _TCHAR 缓冲区
+// 例子:
+//   _tprintf(_T("ANSI to Tchar: %s\n")
+//            _T("UCS to Tchar: %s\n"),
+//            TcharConverter<BUF_SIZE1>()("ANSI string"),
+//            TcharConverter<BUF_SIZE2>()(L"UCS string"));
+// 注意:
+// 1. 缓冲区使用编译时的堆栈中的固定大小, 为模板参数 Size
+// 2. 注意模板实例化引起的编译后代码膨胀
+// 3. 注意和 SIMP_STR/SIMP_CHAR 的区别:
+//    TcharConverter 进行字符转换编码, 通常针对变量
+//    而 SIMP_STR/SIMP_CHAR 是为了在模板中统一字符串字面量的写法, 针对编译时确定的常量
+////////////////////////////////////////////////////////////////////////////////
+
+#define SIMP_TCHAR(size, str)   Simp::TcharConverter<size>()(str)
+
+template <size_t Size>
+struct TcharConverter {
+    const _TCHAR* operator()(const char* mbstr, _locale_t loc = NULL) {
+        return ToTchar(mbstr, Str, Size, loc);
+    }
+
+    const _TCHAR* operator()(const wchar_t* wcstr, _locale_t loc = NULL) {
+        return ToTchar(wcstr, Str, Size, loc);
+    }
+
+    const _TCHAR* operator()(const std::wstring& wcstr, _locale_t loc = NULL) {
+        return ToTchar(wcstr.c_str(), Str, Size, loc);
+    }
+
+    const _TCHAR* operator()(const std::string& mbstr, _locale_t loc = NULL) {
+        return ToTchar(mbstr.c_str(), Str, Size, loc);
+    }
+
+    _TCHAR Str[Size];
+};
 
 SIMP_NS_END

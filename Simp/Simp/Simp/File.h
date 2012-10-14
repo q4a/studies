@@ -16,6 +16,8 @@
 
 #include <Simp/Pattern/Uncopyable.h>
 #include <Simp/String/StrHelper.h>
+#include <Simp/Memory/Alloc.h>
+#include <Simp/Utility.h>
 
 SIMP_NS_BEGIN
 
@@ -163,11 +165,131 @@ typename CharTraits<wchar_t>::IntType fgetc_t<wchar_t>(FILE* fs) {
     return fgetwc(fs);
 }
 
-// TODO:
-inline
-errno_t ReadLine(FILE* stream) {
-    return 0;
-}
+////////////////////////////////////////////////////////////////////////////////
+// class ReadLine
+// 从 FILE 中读入一行
+//
+
+template <typename CharT>
+class ReadLine : private Uncopyable {
+public:
+    // [要求]
+    // ReallocFunc 在扩展分配内存时应保持原来的内容. 如 CRT realloc 符合要求
+    typedef void* (*ReallocFunc)(void* memblock, size_t size, void* ctx);
+    typedef void (*FreeFunc)(void* memblock, void* ctx);
+
+    ReadLine(size_t size = DEF_BUFSIZE, double ratio = DEF_REALLOCRATIO, ReallocFunc rallocFunc = DefRealloc, FreeFunc freeFunc = DefFree, void* ctx = NULL) :
+        m_Buf(NULL), m_BufSize(Max(size, MIN_BUFSIZE)), m_ReallocRatio(Max(ratio, MIN_REALLOCRATIO)), m_Realloc(rallocFunc), m_Free(freeFunc), m_AllocCtx(ctx) {}
+
+    ~ReadLine() {
+        FreeBuf();
+    }
+
+    static void* DefRealloc(void* memblock, size_t size, void* ctx) {
+        SIMP_NOT_USED(ctx);
+        return Realloc(memblock, size);
+    }
+
+    static void DefFree(void* memblock, void* ctx) {
+        SIMP_NOT_USED(ctx);
+        Free(memblock);
+    }
+
+    errno_t Read(FILE* stream) {
+        _ASSERTE(m_Realloc != NULL && m_ReallocRatio >= MIN_REALLOCRATIO && m_BufSize >= MIN_BUFSIZE);
+
+        if (stream == NULL)
+            return EINVAL;
+
+        if (m_Buf == NULL) {
+            m_Buf = (CharT*) m_Realloc(NULL, sizeof(CharT) * m_BufSize, m_AllocCtx);
+            if (m_Buf == NULL)
+                return ENOMEM;
+        }
+
+        m_Buf[m_BufSize - 1] = END_MAGIC;
+
+        if (_fgetts(m_Buf, (int) m_BufSize, stream) == NULL)
+            return -1;
+
+        while (m_Buf[m_BufSize - 1] != END_MAGIC && m_Buf[m_BufSize - 2] != SIMP_CHAR(CharT, '\n')) {
+            size_t deltaSize = (size_t) (m_BufSize * m_ReallocRatio);
+            m_BufSize += deltaSize;
+
+            m_Buf = (CharT*) m_Realloc(m_Buf, sizeof(CharT) * m_BufSize, m_AllocCtx);
+            if (m_Buf == NULL)
+                return ENOMEM;
+
+            m_Buf[m_BufSize - 1] = END_MAGIC;
+
+            if (_fgetts(m_Buf + m_BufSize - deltaSize - 1, (int) deltaSize + 1, stream) == NULL)
+                return -1;
+        }
+
+        return 0;
+    }
+
+    CharT* Line() {
+        return m_Buf;
+    }
+
+    CharT* DetachBuf() {
+        CharT* buf = m_Buf;
+        m_Buf = NULL;
+        return buf;
+    }
+
+    void FreeBuf() {
+        _ASSERTE(m_Free != NULL);
+        if (m_Buf != NULL) {
+            m_Free(m_Buf, m_AllocCtx);
+            m_Buf = NULL;
+        }
+    }
+
+    void SetBufSize(size_t size = DEF_BUFSIZE) {
+        m_BufSize = Max(size, MIN_BUFSIZE);
+    }
+
+    void SetReallocRatio(double ratio = DEF_REALLOCRATIO) {
+        m_ReallocRatio = Max(ratio, MIN_REALLOCRATIO);
+    }
+
+public:
+    static size_t DEF_BUFSIZE;
+    static const size_t MIN_BUFSIZE;
+
+    static double DEF_REALLOCRATIO;
+    static const double MIN_REALLOCRATIO;
+
+    static const CharT END_MAGIC;
+
+private:
+    CharT*      m_Buf;
+    size_t      m_BufSize;
+    double      m_ReallocRatio;
+    ReallocFunc m_Realloc;
+    FreeFunc    m_Free;
+    void*       m_AllocCtx;
+};
+
+template <typename CharT>
+size_t ReadLine<CharT>::DEF_BUFSIZE         = 1024;
+
+template <typename CharT>
+const size_t ReadLine<CharT>::MIN_BUFSIZE   = 8;
+
+template <typename CharT>
+double ReadLine<CharT>::DEF_REALLOCRATIO        = 0.5;
+
+template <typename CharT>
+const double ReadLine<CharT>::MIN_REALLOCRATIO  = 0.01;
+
+template <typename CharT>
+const CharT ReadLine<CharT>::END_MAGIC = SIMP_CHAR(CharT, 'E');
+
+//
+////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
 // 标准文件流 FILE 操作类 StdioFile

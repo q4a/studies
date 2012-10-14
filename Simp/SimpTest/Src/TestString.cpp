@@ -13,10 +13,9 @@ using Simp::tstring;
 using Simp::tcin;
 using Simp::tcout;
 using Simp::tcerr;
-using Simp::ToTchar;
 
 ////////////////////////////////////////////////////////////////////////////////
-// 全局变量
+// 全局量
 ////////////////////////////////////////////////////////////////////////////////
 
 // 保存全局 locale 名称
@@ -49,25 +48,29 @@ void RestoreGlobalLocale(_TCHAR* loc, const _TCHAR* callFunc, BOOL reportOn);
 // 测试用例
 ////////////////////////////////////////////////////////////////////////////////
 
+void TestToTchar_01(BOOL turnOn);
+void TestToTchar_02(BOOL turnOn);
 void TestMbsToWcs(BOOL turnOn);
+void TestCrtStrError(BOOL turnOn);
 
 ////////////////////////////////////////////////////////////////////////////////
 // 测试函数
 ////////////////////////////////////////////////////////////////////////////////
 
-void TestString(BOOL turnOn)
-{
+void TestString(BOOL turnOn) {
     SIMP_OFF_DO(turnOn, return);
 
-    TestMbsToWcs(TRUE);
+    TestToTchar_01(FALSE);
+    TestToTchar_02(FALSE);
+    TestMbsToWcs(FALSE);
+    TestCrtStrError(TRUE);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // 测试辅助
 ////////////////////////////////////////////////////////////////////////////////
 
-void ReportCurrentLocale(const _TCHAR* callFunc, BOOL turnOn)
-{
+void ReportCurrentLocale(const _TCHAR* callFunc, BOOL turnOn) {
     SIMP_OFF_DO(turnOn, return);
 
     const _TCHAR* loc = _tsetlocale(LC_ALL, 0);
@@ -79,16 +82,14 @@ void ReportCurrentLocale(const _TCHAR* callFunc, BOOL turnOn)
         MY_RPT(_CRT_WARN, "%s: current locale: %s", callFunc, loc);
 }
 
-void SetGlobalLocale(const _TCHAR* loc, __out _TCHAR* oldLoc, size_t bufSize, const _TCHAR* callFunc, BOOL reportOn)
-{
+void SetGlobalLocale(const _TCHAR* loc, __out _TCHAR* oldLoc, size_t bufSize, const _TCHAR* callFunc, BOOL reportOn) {
     ReportCurrentLocale(callFunc, reportOn);
     _tcscpy_s(oldLoc, bufSize, _tsetlocale(LC_ALL, NULL));
     _tsetlocale(LC_ALL, loc);
     ReportCurrentLocale(callFunc, reportOn);
 }
 
-void RestoreGlobalLocale(_TCHAR* loc, const _TCHAR* callFunc, BOOL reportOn)
-{
+void RestoreGlobalLocale(_TCHAR* loc, const _TCHAR* callFunc, BOOL reportOn) {
     _tsetlocale(LC_ALL, loc);
     ReportCurrentLocale(callFunc, reportOn);
 }
@@ -98,9 +99,9 @@ void RestoreGlobalLocale(_TCHAR* loc, const _TCHAR* callFunc, BOOL reportOn)
 ////////////////////////////////////////////////////////////////////////////////
 
 // 测试 sim_mbstowcs(), sim_alloc_mbstowcs()
-void TestMbsToWcs(BOOL turnOn)
-{
+void TestMbsToWcs(BOOL turnOn) {
     SIMP_OFF_DO(turnOn, return);
+    PRINT_FUNC_BEGIN;
 
     char mbstr[] = "abc汉字符123";
     const size_t WCSTR_BUF_SIZE = 5;
@@ -117,4 +118,52 @@ void TestMbsToWcs(BOOL turnOn)
     free(wcstr);
 
     RESTORE_GLOBAL_LOCALE(FALSE);       // 恢复 locale
+
+    PRINT_FUNC_END;
 }
+
+void TestToTchar_01(BOOL turnOn) {
+    SIMP_OFF_DO(turnOn, return);
+    PRINT_FUNC_BEGIN;
+
+    _TCHAR msgExcept[BUF_SIZE];
+    _TCHAR msgType[BUF_SIZE];
+
+    try {
+        throw std::domain_error("test ToTchar");
+    }
+    catch (std::exception& e) {
+        _tprintf(_T("Exception: what: %s, type: %s\n"),
+                 Simp::ToTchar(e.what(), msgExcept, _countof(msgExcept)),
+                 Simp::ToTchar(typeid(e).name(), msgType, _countof(msgType)));
+    }
+
+    PRINT_FUNC_END;
+}
+
+void TestToTchar_02(BOOL turnOn) {
+    SIMP_OFF_DO(turnOn, return);
+    PRINT_FUNC_BEGIN;
+
+    _tprintf(_T("ANSI to Tchar: %s\n")
+             _T("UCS to Tchar: %s\n"),
+             SIMP_TCHAR(BUF_SIZE, "ANSI string."),
+             SIMP_TCHAR(BUF_SIZE, L"UCS string."));
+
+    PRINT_FUNC_END;
+}
+
+void TestCrtStrError(BOOL turnOn) {
+    SIMP_OFF_DO(turnOn, return);
+    PRINT_FUNC_BEGIN;
+
+    FILE* stream;
+    errno_t err = _tfopen_s(&stream, _T("NOExistFile.txt"), _T("r"));
+    if (err == 0)
+        fclose(stream);
+    else
+        _tprintf(_T("File open error %d: %s\n"), errno, SIMP_CRTSTRERR(BUF_SIZE, errno));
+
+    PRINT_FUNC_END;
+}
+

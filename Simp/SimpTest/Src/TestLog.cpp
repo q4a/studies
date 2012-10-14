@@ -16,7 +16,6 @@ namespace LOG_LVL = Simp::LOG_LVL;
 using Simp::tcin;
 using Simp::tcout;
 using Simp::tcerr;
-using Simp::ToTchar;
 
 ////////////////////////////////////////////////////////////////////////////////
 // ≤‚ ‘”√¿˝

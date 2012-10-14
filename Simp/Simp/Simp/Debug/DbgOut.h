@@ -16,15 +16,12 @@
 
 SIMP_NS_BEGIN
 
-////////////////////////////////////////////////////////////////////////////////
-// CRT 调试输出
-////////////////////////////////////////////////////////////////////////////////
-
 #ifdef _DEBUG
 
+////////////////////////////////////////////////////////////////////////////////
 // 接受任意个数参数的 SIMP_RPT
-// BEGIN
 //
+
 // char 版
 #define SIMP_RPTA(rptType, fmt, ...) \
     (void) ((1 != _CrtDbgReport(rptType, 0, 0, 0, fmt, __VA_ARGS__)) || \
@@ -51,8 +48,9 @@ SIMP_NS_BEGIN
 #define SIMP_RPT    SIMP_RPTA
 #define SIMP_RPTF   SIMP_RPTFA
 #endif
+
 //
-// END
+////////////////////////////////////////////////////////////////////////////////
 
 // 调用函数 func(paramList), 并用 SIMP_RPT 输出其返回值
 //
@@ -64,18 +62,39 @@ SIMP_NS_BEGIN
         SIMP_RPT(rptType, prefix _T("%s: return=%d\n"), SIMP_STRINGIZET(func), ret); \
     }
 
+////////////////////////////////////////////////////////////////////////////////
 // Assert 断言
 // 接受任意个数参数的 Assert
 // 使用 !!, 而不使用 expr 的比较运算符 (operator==), 后者可能因为重载而出问题, 影响 || 后面的语句
-#define SIMP_ASSERT_EXPR(expr, fmt, ...) \
+//
+
+// char 版
+#define SIMP_ASSERTEA(expr, fmt, ...) \
     (void) ((!!(expr)) || \
-    (1 != _CrtDbgReportT(_CRT_ASSERT, _T(__FILE__), __LINE__, 0, fmt, __VA_ARGS__)) || \
+    (1 != _CrtDbgReport(_CRT_ASSERT, __FILE__, __LINE__, 0, fmt, __VA_ARGS__)) || \
     (_CrtDbgBreak(), 0))
 
+// wchar_t 版
+#define SIMP_ASSERTEW(expr, fmt, ...) \
+    (void) ((!!(expr)) || \
+    (1 != _CrtDbgReportW(_CRT_ASSERT, SIMP_WIDE(__FILE__), __LINE__, 0, fmt, __VA_ARGS__)) || \
+    (_CrtDbgBreak(), 0))
+
+// _TCHAR 版
+#ifdef _UNICODE
+#define SIMP_ASSERT SIMP_ASSERTEW
+#else
+#define SIMP_ASSERT SIMP_ASSERTEA
+#endif
+
+//
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
 // 诊断一段内存是否能够读写
 // 能够访问时产生 SIMP_RPT 调试输出, 不能访问时产生 Assert
-// BEGIN
 //
+
 #define SIMP_MEMORY_READ            0
 #define SIMP_MEMORY_READ_WRITE      1
 #define SIMP_MEMORY_ACCESS_MODES    2
@@ -97,8 +116,9 @@ SIMP_NS_BEGIN
                                  addr, Size, (access == SIMP_MEMORY_READ ? _T("read") : _T("read write"))); \
         } \
     }
+
 //
-// END
+////////////////////////////////////////////////////////////////////////////////
 
 #define SIMP_DEBUG_ONLY(expr)   expr    // 只在 Debug 版有效的语句
 #define SIMP_RELEASE_ONLY(expr) 0       // 只在 Release 版有效的语句

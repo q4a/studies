@@ -23,7 +23,13 @@ SIMP_NS_BEGIN
 template <typename Type>
 inline
 const Type& Min(const Type& l, const Type& r) {
-    return (l > r) ? l : r;
+    return (l < r ? l : r);
+}
+
+template <typename Type>
+inline
+const Type& Max(const Type& l, const Type& r) {
+    return (l > r ? l : r);
 }
 
 // [要求]
@@ -42,8 +48,8 @@ void MinMax(const Type& l, const Type& r, __out Type& minv, __out Type& maxv) {
     }
 }
 
-// 比较左操作数 l_min 和右操作数 r_max 的大小
-// 将小的交换存储到 l_min, 大的存储到 r_max
+// 比较左操作数 lmin 和右操作数 rmax 的大小
+// 将小的交换存储到 lmin, 大的存储到 rmax
 // [要求]
 //   两个操作数都必需是左值
 //   Type 有可访问的拷贝构造函数
@@ -51,9 +57,9 @@ void MinMax(const Type& l, const Type& r, __out Type& minv, __out Type& maxv) {
 //   Type 有操作 operator=
 template <typename Type>
 inline
-void MinMax(__inout Type& l_min, __inout Type& r_max) {
-    if (l_min > r_max)
-        std::swap(l_min, r_max);
+void MinMax(__inout Type& lmin, __inout Type& rmax) {
+    if (lmin > rmax)
+        std::swap(lmin, rmax);
 }
 
 SIMP_NS_END

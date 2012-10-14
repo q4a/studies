@@ -32,6 +32,9 @@
 #include <locale.h>
 #include <sal.h>
 
+#include <limits.h>
+#include <float.h>
+
 #include <intrin.h>
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -22,7 +22,7 @@ using Simp::tcout;
 using Simp::tcerr;
 
 ////////////////////////////////////////////////////////////////////////////////
-// 全局变量
+// 全局量
 ////////////////////////////////////////////////////////////////////////////////
 
 // 原来的工作目录
@@ -48,12 +48,13 @@ int _tmain(int argc, _TCHAR* argv[]) {
     Init();
 
     try {
-        TestString(FALSE);
-        TestMemory(TRUE);
+        TestString(TRUE);
+        TestMemory(FALSE);
         TestDbgout(FALSE);
         TestThread(FALSE);
         TestLog(FALSE);
         TestStdio(FALSE);
+        TestReadLine(FALSE);
     }
     catch (std::exception& e) {
         LogA->Log(LOG_LVL::LEVEL_ERROR, FMTA("std::exception: what: %s, type: %s"), e.what(), typeid(e).name());

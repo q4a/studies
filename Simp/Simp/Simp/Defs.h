@@ -12,7 +12,7 @@
 #pragma once
 
 ////////////////////////////////////////////////////////////////////////////////
-// Simp 库名字空间
+// Simp 库的名字空间
 ////////////////////////////////////////////////////////////////////////////////
 
 #define SIMP_NS_BEGIN   namespace Simp {
@@ -21,7 +21,7 @@
 SIMP_NS_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////
-// Simp 库版本
+// Simp 库的版本
 ////////////////////////////////////////////////////////////////////////////////
 
 #define SIMP_VER        0x01000001
@@ -62,6 +62,9 @@ SIMP_NS_BEGIN
 #define SIMP_EXTERN_C_END
 #endif
 
+// 只产生一个全局存储, 以配合 header-only 库
+#define SIMP_GLOBAL __declspec(selectany)
+
 // 如果 TRUE 就去做
 #define SIMP_TRUE_DO(x, exp)    if (x) { exp; }
 #define SIMP_ON_DO(x, exp)      SIMP_TRUE_DO((x), exp)
@@ -74,8 +77,20 @@ SIMP_NS_BEGIN
 
 // 掩码值
 // 32bit 掩码值的整数 x 有效取值 0 ~ 31
-// x86 GCC 和 VC 实现中 SIMP_MASK_VAL(0) = SIMP_MASK_VAL(32) = 1
-#define SIMP_MASK_VAL(x)        (1 << (x))
+// x86 GCC 和 VC 实现中 SIMP_MASK(0) = SIMP_MASK(32) = 1
+#define SIMP_MASK(x)            (1 << (x))
+
+////////////////////////////////////////////////////////////////////////////////
+// 静态断言
+////////////////////////////////////////////////////////////////////////////////
+
+// 如果 expr = FALSE, VC 产生编译错误 error C2027
+template <BOOL expr> struct StaticAssert;
+template <> struct StaticAssert<TRUE> {};
+template <size_t Size> struct StaticAssertTest {};
+
+#define SIMP_STATIC_ASSERT(x) \
+    typedef StaticAssertTest<sizeof(StaticAssert<BOOL(x)>)> StaticAssertType##__LINE__
 
 ////////////////////////////////////////////////////////////////////////////////
 // 内存分配函数

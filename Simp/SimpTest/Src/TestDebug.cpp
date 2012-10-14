@@ -13,7 +13,6 @@ using Simp::tstring;
 using Simp::tcin;
 using Simp::tcout;
 using Simp::tcerr;
-using Simp::ToTchar;
 
 ////////////////////////////////////////////////////////////////////////////////
 // ≤‚ ‘”√¿˝
