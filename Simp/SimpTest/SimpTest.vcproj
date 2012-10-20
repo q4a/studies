@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)src&quot;;&quot;$(SolutionDir)Simp&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)&quot;;&quot;$(SolutionDir)Simp&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -116,7 +116,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)src&quot;;&quot;$(SolutionDir)Simp&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)&quot;;&quot;$(SolutionDir)Simp&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -177,7 +177,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\src\SimpTest.cpp"
+				RelativePath=".\SimpTest.cpp"
 				>
 			</File>
 			<File
@@ -193,34 +193,42 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\src\TestDebug.cpp"
+				RelativePath=".\TestDebug.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\TestFile.cpp"
+				RelativePath=".\TestFile.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\TestLog.cpp"
+				RelativePath=".\TestLog.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\TestMemory.cpp"
+				RelativePath=".\TestMemory.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\TestString.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\TestThread.cpp"
+				RelativePath=".\TestThread.cpp"
 				>
 			</File>
 			<Filter
-				Name="Common"
+				Name="TestString"
 				>
 				<File
-					RelativePath=".\src\common\User.cpp"
+					RelativePath=".\TestString\TestStrCpy.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\TestString\TestStrEscape.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\TestString\TestString.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\TestString\TestTrim.cpp"
 					>
 				</File>
 			</Filter>
@@ -231,11 +239,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\Common.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Depends.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\SimpTest.h"
+				RelativePath=".\SimpTest.h"
 				>
 			</File>
 			<File
@@ -247,34 +259,34 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\TestDebug.h"
+				RelativePath=".\TestDebug.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\TestFile.h"
+				RelativePath=".\TestFile.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\TestLog.h"
+				RelativePath=".\TestLog.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\TestMemory.h"
+				RelativePath=".\TestMemory.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\TestString.h"
+				RelativePath=".\TestString.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\TestThread.h"
+				RelativePath=".\TestThread.h"
 				>
 			</File>
 			<Filter
 				Name="Common"
 				>
 				<File
-					RelativePath=".\src\common\User.h"
+					RelativePath=".\Common\User.h"
 					>
 				</File>
 			</Filter>
