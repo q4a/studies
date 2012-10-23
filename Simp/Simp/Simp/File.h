@@ -71,34 +71,34 @@ errno_t freopen_t(__out FILE** fs, const wchar_t* fname, const wchar_t* mode, FI
 
 // 无一般化定义
 template <typename CharT>
-int vfprintf_t(FILE* fs, const CharT* format, va_list args);
+int vfprintf_t(FILE* fs, const CharT* fmt, va_list args);
 template <typename CharT>
-int vfprintf_l_t(FILE* fs, const CharT* format, _locale_t loc, va_list args);
+int vfprintf_l_t(FILE* fs, const CharT* fmt, _locale_t loc, va_list args);
 
 // vfprintf_t 的 char 特化
 template <>
 inline
-int vfprintf_t(FILE* fs, const char* format, va_list args) {
-    return vfprintf(fs, format, args);
+int vfprintf_t(FILE* fs, const char* fmt, va_list args) {
+    return vfprintf(fs, fmt, args);
 }
 // vfprintf_l_t 的 char 特化
 template <>
 inline
-int vfprintf_l_t(FILE* fs, const char* format, _locale_t loc, va_list args) {
-    return _vfprintf_l(fs, format, loc, args);
+int vfprintf_l_t(FILE* fs, const char* fmt, _locale_t loc, va_list args) {
+    return _vfprintf_l(fs, fmt, loc, args);
 }
 
 // vfprintf_t 的 wchar_t 特化
 template <>
 inline
-int vfprintf_t(FILE* fs, const wchar_t* format, va_list args) {
-    return vfwprintf(fs, format, args);
+int vfprintf_t(FILE* fs, const wchar_t* fmt, va_list args) {
+    return vfwprintf(fs, fmt, args);
 }
 // vfprintf_l_t 的 wchar_t 特化
 template <>
 inline
-int vfprintf_l_t(FILE* fs, const wchar_t* format, _locale_t loc, va_list args) {
-    return _vfwprintf_l(fs, format, loc, args);
+int vfprintf_l_t(FILE* fs, const wchar_t* fmt, _locale_t loc, va_list args) {
+    return _vfwprintf_l(fs, fmt, loc, args);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -336,19 +336,19 @@ public:
     // formatted IO
 
     template <typename CharT>
-    int Printf(const CharT* format, ...) {
+    int Printf(const CharT* fmt, ...) {
         va_list args;
-        va_start(args, format);
-        int ret = vfprintf_t(m_Stream, format, args);
+        va_start(args, fmt);
+        int ret = vfprintf_t(m_Stream, fmt, args);
         va_end(args);
         return ret;
     }
 
     template <typename CharT>
-    int Printf(const CharT* format, _locale_t locale, ...) {
+    int Printf(const CharT* fmt, _locale_t locale, ...) {
         va_list args;
-        va_start(args, format);
-        int ret = vfprintf_l_t(m_Stream, format, locale, args);
+        va_start(args, fmt);
+        int ret = vfprintf_l_t(m_Stream, fmt, locale, args);
         va_end(args);
         return ret;
     }

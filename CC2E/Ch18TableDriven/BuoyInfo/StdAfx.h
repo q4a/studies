@@ -1,13 +1,10 @@
 // StdAfx.h
 //
 
-#ifndef __STDAFX_H__
-#define __STDAFX_H__
+#pragma once
 
 // 目标 Windows 的版本
 #include "TargetVer.h"
 
 // BuoyInfo 依赖的头文件
 #include "Depends.h"
-
-#endif  // __STDAFX_H__

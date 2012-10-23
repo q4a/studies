@@ -7,28 +7,29 @@
 // 全局量
 ////////////////////////////////////////////////////////////////////////////////
 
-// 程序模块名
-#undef MODULE_NAME
-#define MODULE_NAME     "SimpTest"
+// 模块名
+const char      MODULE_NAMEA[]  = "SimpTest";
+const wchar_t   MODULE_NAMEW[]  = L"SimpTest";
+const _TCHAR    MODULE_NAME[]   = _T("SimpTest");
 
 // 常用缓冲区大小
-#define BUF_SIZE        512
+const int BUF_SIZE = 256;
 
 // 日志对象
-extern Simp::LogBaseT<char>*    LogA;
-extern Simp::LogBaseT<wchar_t>* LogW;
-extern Simp::LogBaseT<_TCHAR>*  Log;
+extern Simp::LogBase<char>*     LogA;
+extern Simp::LogBase<wchar_t>*  LogW;
+extern Simp::LogBase<_TCHAR>*   Log;
 
 ////////////////////////////////////////////////////////////////////////////////
 // 调试功能
 ////////////////////////////////////////////////////////////////////////////////
 
 // 以 "模块名!函数名:" 形式输出调试报告
-#define FMT(fmt)    SIMP_RPTFMT(MODULE_NAME, fmt)
-#define FMTA(fmt)   SIMP_RPTFMTA(MODULE_NAME, fmt)
+#define FMT(fmt)    SIMP_RPTFMT(fmt), MODULE_NAME
+#define FMTA(fmt)   SIMP_RPTFMTA(fmt), MODULE_NAMEA
 
 #define MY_RPT(rptType, fmt, ...)   SIMP_FMTRPT(MODULE_NAME, rptType, fmt, __VA_ARGS__)
-#define MY_RPTA(rptType, fmt, ...)  SIMP_FMTRPTA(MODULE_NAME, rptType, fmt, __VA_ARGS__)
+#define MY_RPTA(rptType, fmt, ...)  SIMP_FMTRPTA(MODULE_NAMEA, rptType, fmt, __VA_ARGS__)
 
 // 打印函数名
 #define PRINT_FILE          stdout
@@ -36,4 +37,4 @@ extern Simp::LogBaseT<_TCHAR>*  Log;
 #define PRINT_FUNC_BEGIN    _ftprintf(PRINT_FILE, _T("----- BEGIN: %s\n"), _T(__FUNCTION__))
 #define PRINT_FUNC_END      _ftprintf(PRINT_FILE, _T("-----   END: %s\n"), _T(__FUNCTION__))
 
-#define MY_CALL_RPT(rptType, ret, func, paramList)  SIMP_CALL_RPT(rptType, _T(MODULE_NAME) _T("!") _T(__FUNCTION__) _T(": "), ret, func, paramList)
+#define MY_CALL_RPT(rptType, ret, func, paramList)  SIMP_CALL_RPT(rptType, SIMP_MAKESTR(BUF_SIZE, _T("%s!") _T(__FUNCTION__) _T(": "), MODULE_NAME), ret, func, paramList)

@@ -21,18 +21,18 @@
 SIMP_NS_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////
-// Windows 调试输出日志的设施类模板 LogDebugOutT
+// Windows 调试输出日志的设施类模板 LogDebugOut
 ////////////////////////////////////////////////////////////////////////////////
 
 template <typename CharT>
-class LogDebugOutT : public LogBaseT<CharT> {
+class LogDebugOut : public LogBase<CharT> {
 public:
     explicit
-    LogDebugOutT(size_t bufSize, LOG_LEVEL baseLevel) : LogBaseT<CharT>(baseLevel), m_Buf(NULL), m_BufSize(0) {
+    LogDebugOut(size_t bufSize, LOG_LEVEL baseLevel) : LogBase<CharT>(baseLevel), m_Buf(NULL), m_BufSize(0) {
         SetBufSize(bufSize);
     }
 
-    virtual ~LogDebugOutT() {
+    virtual ~LogDebugOut() {
         Destroy();
     }
 
@@ -43,8 +43,8 @@ public:
     }
 
 public:
-    virtual void DoLog(const CharT* format, va_list args) {
-        vsprintf_t(m_Buf, m_BufSize, format, args);
+    virtual void DoLog(const CharT* fmt, va_list args) {
+        vsprintf_t(m_Buf, m_BufSize, fmt, args);
         OutputDebug(m_Buf);
     }
 
@@ -60,25 +60,15 @@ public:
         m_BufSize = bufSize;
     }
 
+    // 单件对象创建函数
+    static LogDebugOut<CharT>* Inst(LOG_LEVEL baseLevel, size_t sizeBuf) {
+        static LogDebugOut<CharT> log(sizeBuf, baseLevel);
+        return &log;
+    }
+
 private:
     size_t  m_BufSize;
     CharT*  m_Buf;
 };
-
-////////////////////////////////////////////////////////////////////////////////
-// LogDebugOutT 的单件对象创建函数
-////////////////////////////////////////////////////////////////////////////////
-
-template <typename CharT>
-inline
-LogBaseT<CharT>* DebugOutLogT(LOG_LEVEL baseLevel, size_t sizeBuf) {
-    static LogDebugOutT<CharT> log(sizeBuf, baseLevel);
-    return &log;
-}
-
-inline
-LogBaseT<_TCHAR>* DebugOutLog(LOG_LEVEL baseLevel, size_t sizeBuf) {
-    return DebugOutLogT<_TCHAR>(baseLevel, sizeBuf);
-}
 
 SIMP_NS_END

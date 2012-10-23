@@ -1,38 +1,36 @@
 // BuoyInfo.h
 //
 
-#ifndef __BUOYINFO_H__
-#define __BUOYINFO_H__
+#pragma once
 
 ////////////////////////////////////////////////////////////////////////////////
 // 全局量
 ////////////////////////////////////////////////////////////////////////////////
 
-// 程序模块名
-#undef MODULE_NAME
-#define MODULE_NAME     "BuoyInfo"
+// 模块名
+const char      MODULE_NAMEA[]  = "BuoyInfo";
+const wchar_t   MODULE_NAMEW[]  = L"BuoyInfo";
+const _TCHAR    MODULE_NAME[]   = _T("BuoyInfo");
 
 // 常用缓冲区大小
-#define BUF_SIZE        512
+const int BUF_SIZE = 512;
 
 // errno 的用户定义值下限
-#define ERR_USER        128
+const int ERR_USER = 128;
 
 ////////////////////////////////////////////////////////////////////////////////
 // 调试功能
 ////////////////////////////////////////////////////////////////////////////////
 
 // 以 "模块名!函数名:" 形式输出调试报告
-#define FMT(fmt)    _T(MODULE_NAME) _T("!") _T(__FUNCTION__) _T(": ")  _T(fmt) _T("\n")
-#define FMTA(fmt)   MODULE_NAME "!" __FUNCTION__ ": " fmt "\n"
+#define FMT(fmt)    SIMP_RPTFMT(fmt), MODULE_NAME
+#define FMTA(fmt)   SIMP_RPTFMTA(fmt), MODULE_NAMEA
 
-#define MY_RPT(rptType, fmt, ...)   SIMP_RPT(rptType, FMT(fmt), __VA_ARGS__)
-#define MY_RPTA(rptType, fmt, ...)  SIMP_RPTA(rptType, FMTA(fmt), __VA_ARGS__)
+#define MY_RPT(rptType, fmt, ...)   SIMP_FMTRPT(MODULE_NAME, rptType, fmt, __VA_ARGS__)
+#define MY_RPTA(rptType, fmt, ...)  SIMP_FMTRPTA(MODULE_NAMEA, rptType, fmt, __VA_ARGS__)
 
 // 打印函数名
 #define PRINT_FILE          stdout
 #define PRINT_FUNC          _ftprintf(PRINT_FILE, _T("----- : %s\n"), _T(__FUNCTION__))
 #define PRINT_FUNC_BEGIN    _ftprintf(PRINT_FILE, _T("----- BEGIN: %s\n"), _T(__FUNCTION__))
 #define PRINT_FUNC_END      _ftprintf(PRINT_FILE, _T("-----   END: %s\n"), _T(__FUNCTION__))
-
-#endif  // __BUOYINFO_H__

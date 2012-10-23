@@ -19,7 +19,7 @@
 SIMP_NS_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////
-// 日志基类模板 LogBaseT
+// 日志基类模板 LogBase
 ////////////////////////////////////////////////////////////////////////////////
 
 // 日志级别类型
@@ -37,34 +37,34 @@ enum LEVEL_VALUE {
 }   // namespace LOG_LVL
 
 template <typename CharT>
-class LogBaseT : private Uncopyable {
+class LogBase : private Uncopyable {
 public:
-    LogBaseT(LOG_LEVEL baseLevel) : m_BaseLevel(baseLevel), m_LastLevel(baseLevel) {}
+    LogBase(LOG_LEVEL baseLevel) : m_BaseLevel(baseLevel), m_LastLevel(baseLevel) {}
 
-    virtual ~LogBaseT() {}
+    virtual ~LogBase() {}
 
     virtual void Destroy() {}
 
-    virtual void DoLog(const CharT* format, va_list args) = 0;
+    virtual void DoLog(const CharT* fmt, va_list args) = 0;
 
-    void Log(LOG_LEVEL level, const CharT* format, ...) {
+    void Log(LOG_LEVEL level, const CharT* fmt, ...) {
         if (level < m_BaseLevel)
             return;
 
         va_list args;
-        va_start(args, format);
-        this->DoLog(format, args);
+        va_start(args, fmt);
+        this->DoLog(fmt, args);
         m_LastLevel = level;
         va_end(args);
     }
 
-    void Log(const CharT* format, ...) {
+    void Log(const CharT* fmt, ...) {
         if (m_LastLevel < m_BaseLevel)
             return;
 
         va_list args;
-        va_start(args, format);
-        this->DoLog(format, args);
+        va_start(args, fmt);
+        this->DoLog(fmt, args);
         va_end(args);
     }
 

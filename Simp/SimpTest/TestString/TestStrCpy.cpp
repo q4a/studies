@@ -29,15 +29,16 @@ void MyInvalidParameterHandler(const wchar_t* expression, const wchar_t* functio
 void TestStrCpy(BOOL turnOn) {
     SIMP_OFF_DO(turnOn, return);
 
-    srand((unsigned) time(NULL));
+    InitRand();
     _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_DEBUG);
-    _set_invalid_parameter_handler(MyInvalidParameterHandler);
+    _invalid_parameter_handler oldIPH = _set_invalid_parameter_handler(MyInvalidParameterHandler);
 
     TestStrCpy_01(FALSE);
     TestStrCpy_02(FALSE);
     TestStrCpy_03(FALSE);
     TestStrCpy_04(TRUE);
 
+    _set_invalid_parameter_handler(oldIPH);
     _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_WNDW);
 }
 
@@ -45,7 +46,6 @@ void TestStrCpy(BOOL turnOn) {
 // 设置 InvalidParameterHandler 让 _tcscpy_s 返回控制，代替默认行为 Assert + 终止程序
 void TestStrCpy_01(BOOL turnOn) {
     SIMP_OFF_DO(turnOn, return);
-
     PRINT_FUNC_BEGIN;
 
     const size_t BUF_SIZE1 = 8;
@@ -119,7 +119,6 @@ void TestCRTStrCpySpeed(BOOL dumpStr, int round, size_t destBufSize, size_t srcB
 // 测试 StrNCpy 的正确性
 void TestStrCpy_02(BOOL turnOn) {
     SIMP_OFF_DO(turnOn, return);
-
     PRINT_FUNC_BEGIN;
 
     const size_t DEST_BUF_SIZE = 90;
@@ -132,10 +131,9 @@ void TestStrCpy_02(BOOL turnOn) {
     PRINT_FUNC_END;
 }
 
-// 测试 CRT strcpy 和 StrNCpy 的效率
+// 测试 CRT strcpy 和 StrNCpy 的效率/速度
 void TestStrCpy_03(BOOL turnOn) {
     SIMP_OFF_DO(turnOn, return);
-
     PRINT_FUNC_BEGIN;
 
     const size_t DEST_BUF_SIZE = 10 * 1024 * 1024;
@@ -153,7 +151,6 @@ void TestStrCpy_03(BOOL turnOn) {
 // 测试带截断错误返回的 StrNCpy
 void TestStrCpy_04(BOOL turnOn) {
     SIMP_OFF_DO(turnOn, return);
-
     PRINT_FUNC_BEGIN;
 
     _TCHAR dest[8];

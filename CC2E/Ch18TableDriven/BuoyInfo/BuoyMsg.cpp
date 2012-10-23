@@ -20,8 +20,7 @@ using Simp::tstring;
 ////////////////////////////////////////////////////////////////////////////////
 
 // len 是不包括结尾 \0 的字符数. 本函数不适用于 MBCS
-inline void StrToLower(__out _TCHAR* str, size_t len = 0)
-{
+inline void StrToLower(__out _TCHAR* str, size_t len = 0) {
     _ASSERTE(str != NULL);
     if (len == 0)
         len = _tcslen(str);
@@ -30,8 +29,7 @@ inline void StrToLower(__out _TCHAR* str, size_t len = 0)
 }
 
 // 字符串中的偏移位置
-inline _TCHAR* StrOffset(_TCHAR* offset, const _TCHAR* str)
-{
+inline _TCHAR* StrOffset(_TCHAR* offset, const _TCHAR* str) {
     return _tcsstr(offset, str) + _tcslen(str);
 }
 
@@ -43,14 +41,12 @@ FieldType::NameTypeMapT FieldType::NameTypeMap;
 const _TCHAR* FieldType::TypeNameMap[FIELD_MAX];
 
 // 建立类型名和类型标识之间的双向映射
-void FieldType::BindTypeName(FIELD_TYPE type, const _TCHAR* name)
-{
+void FieldType::BindTypeName(FIELD_TYPE type, const _TCHAR* name) {
     TypeNameMap[type] = name;
     NameTypeMap[name] = type;
 }
 
-void FieldType::Init()
-{
+void FieldType::Init() {
     static BOOL inited = FALSE;
     if (inited)
         return;
@@ -72,8 +68,7 @@ void FieldType::Init()
 Field::ToStrFunc Field::ToStrFuncMap[FIELD_MAX];
 Field::MakeFunc Field::MakeFuncMap[FIELD_MAX];
 
-errno_t Field::ToStrByInt(__out Simp::tstring* str, const Variant& val)
-{
+errno_t Field::ToStrByInt(__out Simp::tstring* str, const Variant& val) {
     _TCHAR buf[64];
     errno_t err = _itot_s(val.m_Int, buf, _countof(buf), 10);
     if (err == 0)
@@ -81,8 +76,7 @@ errno_t Field::ToStrByInt(__out Simp::tstring* str, const Variant& val)
     return err;
 }
 
-errno_t Field::ToStrByFloat(__out Simp::tstring* str, const Variant& val)
-{
+errno_t Field::ToStrByFloat(__out Simp::tstring* str, const Variant& val) {
     _TCHAR buf[_CVTBUFSIZE];
     errno = 0;
     _stprintf_s(buf, _countof(buf), _T("%.2f"), val.m_Double);
@@ -91,14 +85,12 @@ errno_t Field::ToStrByFloat(__out Simp::tstring* str, const Variant& val)
     return errno;
 }
 
-errno_t Field::ToStrByString(__out Simp::tstring* str, const Variant& val)
-{
+errno_t Field::ToStrByString(__out Simp::tstring* str, const Variant& val) {
     *str = val.m_String;
     return 0;
 }
 
-errno_t Field::ToStrByTime(__out Simp::tstring* str, const Variant& val)
-{
+errno_t Field::ToStrByTime(__out Simp::tstring* str, const Variant& val) {
     tm t;
     errno_t err = localtime_s(&t, &val.m_Time);
     if (err != 0)
@@ -112,14 +104,12 @@ errno_t Field::ToStrByTime(__out Simp::tstring* str, const Variant& val)
     return errno;
 }
 
-errno_t Field::ToStrByBool(__out Simp::tstring* str, const Variant& val)
-{
+errno_t Field::ToStrByBool(__out Simp::tstring* str, const Variant& val) {
     *str = val.m_Bool ? _T("True") : _T("False");
     return 0;
 }
 
-errno_t Field::ToStr(__out Simp::tstring* str) const
-{
+errno_t Field::ToStr(__out Simp::tstring* str) const {
     FIELD_TYPE type = m_FieldDesc->m_FieldType;
     if (type == FIELD_ERROR || type >= FIELD_MAX || str == NULL)
         return EINVAL;
@@ -130,22 +120,19 @@ errno_t Field::ToStr(__out Simp::tstring* str) const
     return err;
 }
 
-errno_t Field::MakeInt(__out Variant* val, const _TCHAR* str)
-{
+errno_t Field::MakeInt(__out Variant* val, const _TCHAR* str) {
     errno = 0;
     val->m_Int = _tstoi(str);
     return errno;
 }
 
-errno_t Field::MakeFloat(__out Variant* val, const _TCHAR* str)
-{
+errno_t Field::MakeFloat(__out Variant* val, const _TCHAR* str) {
     errno = 0;
     val->m_Double = _tstof(str);
     return errno;
 }
 
-errno_t Field::MakeString(__out Variant* val, const _TCHAR* str)
-{
+errno_t Field::MakeString(__out Variant* val, const _TCHAR* str) {
     errno = 0;
     val->m_String = _tcsdup(str);
     if (val->m_String == NULL)
@@ -153,8 +140,7 @@ errno_t Field::MakeString(__out Variant* val, const _TCHAR* str)
     return errno;
 }
 
-errno_t Field::MakeTime(__out Variant* val, const _TCHAR* str)
-{
+errno_t Field::MakeTime(__out Variant* val, const _TCHAR* str) {
     using namespace boost::gregorian;
 
     const char* str2;
@@ -182,8 +168,7 @@ errno_t Field::MakeTime(__out Variant* val, const _TCHAR* str)
     return errno;
 }
 
-errno_t Field::MakeBool(__out Variant* val, const _TCHAR* str)
-{
+errno_t Field::MakeBool(__out Variant* val, const _TCHAR* str) {
     _TCHAR str2[10];
     _tcscpy_s(str2, _countof(str2), str);
     if (_tcsicmp(str2, _T("False")) == 0 || _tstoi(str2) == 0)
@@ -195,8 +180,7 @@ errno_t Field::MakeBool(__out Variant* val, const _TCHAR* str)
     return 0;
 }
 
-void Field::Init()
-{
+void Field::Init() {
     static BOOL inited = FALSE;
     if (inited)
         return;
@@ -218,8 +202,7 @@ void Field::Init()
     inited = TRUE;
 }
 
-errno_t Field::Assign(const _TCHAR* str)
-{
+errno_t Field::Assign(const _TCHAR* str) {
     FIELD_TYPE type = m_FieldDesc->m_FieldType;
     if (type == FIELD_ERROR || type >= FIELD_MAX || str == NULL)
         return EINVAL;
@@ -238,8 +221,7 @@ const _TCHAR* FieldDesc::TypeSep = _T(" :\t";);
 ////////////////////////////////////////////////////////////////////////////////
 
 // 消息描述表文件格式 (每行): msgType fieldName1:fieldType1 ...
-errno_t MsgDescTbl::LoadFile(const _TCHAR* fname)
-{
+errno_t MsgDescTbl::LoadFile(const _TCHAR* fname) {
     Simp::StdioFile descFile;
     errno_t ret = descFile.Open(fname, _T("r"));
     if (ret != 0)
@@ -289,8 +271,7 @@ errno_t MsgDescTbl::LoadFile(const _TCHAR* fname)
     return 0;
 }
 
-void MsgDescTbl::Print(FILE* stream)
-{
+void MsgDescTbl::Print(FILE* stream) {
     MsgDescMapT::const_iterator i = m_MsgDescMap.begin();
     for (; i != m_MsgDescMap.end(); ++i) {
         const tstring& msgType = i->first;
@@ -313,8 +294,7 @@ void MsgDescTbl::Print(FILE* stream)
 ////////////////////////////////////////////////////////////////////////////////
 
 // 消息表文件格式 (每行): id msgType fieldName1:fieldVal1 ...
-errno_t MsgTbl::LoadFile(const _TCHAR* fname)
-{
+errno_t MsgTbl::LoadFile(const _TCHAR* fname) {
     Simp::StdioFile msgFile;
     errno_t ret = msgFile.Open(fname, _T("r"));
     if (ret != 0)
@@ -381,8 +361,7 @@ errno_t MsgTbl::LoadFile(const _TCHAR* fname)
     return 0;
 }
 
-void MsgTbl::Print(FILE* stream)
-{
+void MsgTbl::Print(FILE* stream) {
     MsgMapT::const_iterator i = m_MsgMap.begin();
     tstring val;
 
@@ -409,8 +388,7 @@ void MsgTbl::Print(FILE* stream)
 // Test Case
 ////////////////////////////////////////////////////////////////////////////////
 
-void TestMsgDescTbl(BOOL turnOn)
-{
+void TestMsgDescTbl(BOOL turnOn) {
     SIMP_OFF_DO(turnOn, return);
     PRINT_FUNC_BEGIN;
 
@@ -422,8 +400,7 @@ void TestMsgDescTbl(BOOL turnOn)
     PRINT_FUNC_END;
 }
 
-void TestMsgTbl(BOOL turnOn)
-{
+void TestMsgTbl(BOOL turnOn) {
     SIMP_OFF_DO(turnOn, return);
     PRINT_FUNC_BEGIN;
 

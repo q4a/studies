@@ -24,8 +24,7 @@ void Uninit();
 // 程序入口
 ////////////////////////////////////////////////////////////////////////////////
 
-int _tmain(int argc, _TCHAR* argv[])
-{
+int _tmain(int argc, _TCHAR* argv[]) {
     Init();
 
     TestMsgDescTbl(FALSE);
@@ -42,8 +41,7 @@ int _tmain(int argc, _TCHAR* argv[])
 ////////////////////////////////////////////////////////////////////////////////
 
 // 初始化运行环境
-void Init()
-{
+void Init() {
 #define _USE_CRT_LOCALE
 
 #if _MSC_VER > 1400
@@ -72,7 +70,7 @@ void Init()
     // 设置 CRT 调试输出
     _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
     _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
-    _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_DEBUG);
+    _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_WNDW);
 
     // 设置当前 exe 文件的目录为工作目录
     _TCHAR modDir[BUF_SIZE];
@@ -82,8 +80,7 @@ void Init()
 }
 
 // 清理运行环境
-void Uninit()
-{
+void Uninit() {
     // 恢复原来的工作目录
     _tchdir(OldWorkDir);
     free(OldWorkDir);

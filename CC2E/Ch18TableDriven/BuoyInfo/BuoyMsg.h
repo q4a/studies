@@ -21,8 +21,7 @@
 //   2. std::string 不要用 NULL 初始化
 //
 
-#ifndef __BUOYMSG_H__
-#define __BUOYMSG_H__
+#pragma once
 
 ////////////////////////////////////////////////////////////////////////////////
 // 字段格式
@@ -247,5 +246,3 @@ struct MsgTbl {
 
 void TestMsgDescTbl(BOOL turnOn);
 void TestMsgTbl(BOOL turnOn);
-
-#endif  // __BUOYMSG_H__

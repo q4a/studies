@@ -9,8 +9,8 @@
 // Ãû×Ö¿Õ¼ä
 ////////////////////////////////////////////////////////////////////////////////
 
-using Simp::LogBaseT;
-using Simp::LogDebugOutT;
+using Simp::LogBase;
+using Simp::LogDebugOut;
 namespace LOG_LVL = Simp::LOG_LVL;
 
 using Simp::tcin;
@@ -27,8 +27,7 @@ void TestDbgoutLog(BOOL turnOn);
 // ²âÊÔº¯Êý
 ////////////////////////////////////////////////////////////////////////////////
 
-void TestLog(BOOL turnOn)
-{
+void TestLog(BOOL turnOn) {
     SIMP_OFF_DO(turnOn, return);
     TestDbgoutLog(TRUE);
 }
@@ -38,8 +37,7 @@ void TestLog(BOOL turnOn)
 ////////////////////////////////////////////////////////////////////////////////
 
 // ²âÊÔ LogDebugOut
-void TestDbgoutLog(BOOL turnOn)
-{
+void TestDbgoutLog(BOOL turnOn) {
     SIMP_OFF_DO(turnOn, return);
     PRINT_FUNC_BEGIN;
 
@@ -47,7 +45,7 @@ void TestDbgoutLog(BOOL turnOn)
     double dv = 3.14159;
     const _TCHAR* str = _T("hello world!");
 
-    std::auto_ptr<LogDebugOutT<_TCHAR> > log(new LogDebugOutT<_TCHAR>(BUF_SIZE, LOG_LVL::LEVEL_WARNING));
+    std::auto_ptr<LogDebugOut<_TCHAR> > log(new LogDebugOut<_TCHAR>(BUF_SIZE, LOG_LVL::LEVEL_WARNING));
 
     log->Log(FMT("This is a log test: %d, %f, %s\n"), iv, dv, str);
 

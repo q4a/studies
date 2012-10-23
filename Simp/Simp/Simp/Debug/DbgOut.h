@@ -20,7 +20,7 @@ SIMP_NS_BEGIN
 
 ////////////////////////////////////////////////////////////////////////////////
 // 接受任意个数参数的 SIMP_RPT
-//
+////////////////////////////////////////////////////////////////////////////////
 
 // char 版
 #define SIMP_RPTA(rptType, fmt, ...) \
@@ -49,24 +49,24 @@ SIMP_NS_BEGIN
 #define SIMP_RPTF   SIMP_RPTFA
 #endif
 
-//
 ////////////////////////////////////////////////////////////////////////////////
-
 // 调用函数 func(paramList), 并用 SIMP_RPT 输出其返回值
 //
 // [要求]
-//   1. paramList 用括号包起来, 如 (p1, p2)
-//   2. func 的返回值是整数类型, 如 表示函数执行结果的状态值, 错误码
+// 1. paramList 用括号包起来, 如 (p1, p2)
+// 2. func 的返回值是整数类型, 如 表示函数执行结果的状态值, 错误码
+////////////////////////////////////////////////////////////////////////////////
+
 #define SIMP_CALL_RPT(rptType, prefix, ret, func, paramList) { \
         ret = func##paramList; \
-        SIMP_RPT(rptType, prefix _T("%s: return=%d\n"), SIMP_STRINGIZET(func), ret); \
+        SIMP_RPT(rptType, _T("%s%s: return=%d\n"), prefix, SIMP_STRINGIZET(func), ret); \
     }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Assert 断言
 // 接受任意个数参数的 Assert
 // 使用 !!, 而不使用 expr 的比较运算符 (operator==), 后者可能因为重载而出问题, 影响 || 后面的语句
-//
+////////////////////////////////////////////////////////////////////////////////
 
 // char 版
 #define SIMP_ASSERTEA(expr, fmt, ...) \
@@ -87,13 +87,10 @@ SIMP_NS_BEGIN
 #define SIMP_ASSERT SIMP_ASSERTEA
 #endif
 
-//
-////////////////////////////////////////////////////////////////////////////////
-
 ////////////////////////////////////////////////////////////////////////////////
 // 诊断一段内存是否能够读写
 // 能够访问时产生 SIMP_RPT 调试输出, 不能访问时产生 Assert
-//
+////////////////////////////////////////////////////////////////////////////////
 
 #define SIMP_MEMORY_READ            0
 #define SIMP_MEMORY_READ_WRITE      1
@@ -117,9 +114,6 @@ SIMP_NS_BEGIN
         } \
     }
 
-//
-////////////////////////////////////////////////////////////////////////////////
-
 #define SIMP_DEBUG_ONLY(expr)   expr    // 只在 Debug 版有效的语句
 #define SIMP_RELEASE_ONLY(expr) 0       // 只在 Release 版有效的语句
 
@@ -141,14 +135,18 @@ SIMP_NS_BEGIN
 
 #define SIMP_DEBUG_ONLY(expr)       0
 #define SIMP_RELEASE_ONLY(expr)     expr
+
 #endif
 
 // 以 "模块名!函数名:" 形式输出调试报告
-#define SIMP_RPTFMT(module, fmt)    _T(module) _T("!") _T(__FUNCTION__) _T(": ")  _T(fmt) _T("\n")
-#define SIMP_RPTFMTA(module, fmt)   module "!" __FUNCTION__ ": " fmt "\n"
+#define SIMP_RPTFMT(fmt)    _T("%s!") _T(__FUNCTION__) _T(": ")  _T(fmt) _T("\n")
+#define SIMP_RPTFMTA(fmt)   "%s!" __FUNCTION__ ": " fmt "\n"
 
-#define SIMP_FMTRPT(module, rptType, fmt, ...)  SIMP_RPT(rptType, SIMP_RPTFMT(module, fmt), __VA_ARGS__)
-#define SIMP_FMTRPTA(module, rptType, fmt, ...) SIMP_RPTA(rptType, SIMP_RPTFMTA(module, fmt), __VA_ARGS__)
+#define SIMP_FMTRPT(module, rptType, fmt, ...)  SIMP_RPT(rptType, SIMP_RPTFMT(fmt), module, __VA_ARGS__)
+#define SIMP_FMTRPTA(module, rptType, fmt, ...) SIMP_RPTA(rptType, SIMP_RPTFMTA(fmt), module, __VA_ARGS__)
+
+#define SIMP_MRPT(rptType, fmt, ...)            SIMP_FMTRPT(Simp::MODULE_NAME, rptType, fmt, __VA_ARGS__)
+#define SIMP_MRPTA(rptType, fmt, ...)           SIMP_FMTRPTA(Simp::MODULE_NAMEA, rptType, fmt, __VA_ARGS__)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Windows API 调试输出

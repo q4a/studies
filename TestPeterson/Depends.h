@@ -1,8 +1,7 @@
 // Depends.h
 //
 
-#ifndef __DEPENDS_H__
-#define __DEPENDS_H__
+#pragma once
 
 ////////////////////////////////////////////////////////////////////////////////
 // C 标准库与运行时库 (CRT)
@@ -133,5 +132,3 @@
 #include <Simp/Path.h>
 #include <Simp/Log.h>
 #include <Simp/Thread.h>
-
-#endif  // __DEPENDS_H__

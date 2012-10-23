@@ -62,7 +62,7 @@ SIMP_NS_BEGIN
 #define SIMP_EXTERN_C_END
 #endif
 
-// 只产生一个全局存储, 以配合 header-only 库
+// 只产生一个全局存储, 以便在 .h 中定义全局变量
 #define SIMP_GLOBAL __declspec(selectany)
 
 // 如果 TRUE 就去做
@@ -79,6 +79,11 @@ SIMP_NS_BEGIN
 // 32bit 掩码值的整数 x 有效取值 0 ~ 31
 // x86 GCC 和 VC 实现中 SIMP_MASK(0) = SIMP_MASK(32) = 1
 #define SIMP_MASK(x)            (1 << (x))
+
+// Simp 模块名
+const char      MODULE_NAMEA[]  = "Simp";
+const wchar_t   MODULE_NAMEW[]  = L"Simp";
+const _TCHAR    MODULE_NAME[]   = _T("Simp");
 
 ////////////////////////////////////////////////////////////////////////////////
 // 静态断言

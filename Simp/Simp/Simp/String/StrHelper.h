@@ -90,33 +90,57 @@ inline const wchar_t Char(const char ch, const wchar_t wch) {
 
 // 转接 CRT vsprintf 的函数模板, 无一般化定义
 template <typename CharT>
-int vsprintf_t(CharT* buf, size_t charSize, const CharT* format, va_list args);
+int vsprintf_t(CharT* buf, size_t charSize, const CharT* fmt, va_list args);
 
 // vsprintf_t 的 char 特化
 template <>
 inline
-int vsprintf_t(char* buf, size_t charSize, const char* format, va_list args) {
-    return vsprintf_s(buf, charSize, format, args);
+int vsprintf_t(char* buf, size_t charSize, const char* fmt, va_list args) {
+    return vsprintf_s(buf, charSize, fmt, args);
 }
 
 // vsprintf_t 的 wchar_t 特化
 template <>
 inline
-int vsprintf_t(wchar_t* buf, size_t charSize, const wchar_t* format, va_list args) {
-    return vswprintf_s(buf, charSize, format, args);
+int vsprintf_t(wchar_t* buf, size_t charSize, const wchar_t* fmt, va_list args) {
+    return vswprintf_s(buf, charSize, fmt, args);
 }
 
 // 格式化构造 string
-template <size_t BufSize, typename CharT>
+template <size_t Size, typename CharT>
 inline
-std::basic_string<CharT> MakeString(const CharT* format, ...) {
-    CharT buf[BufSize];
+std::basic_string<CharT> MakeString(const CharT* fmt, ...) {
+    CharT buf[Size];
     va_list args;
-    va_start(args, format);
-    vsprintf_t(buf, BufSize, format, args);
+    va_start(args, fmt);
+    vsprintf_t(buf, Size, fmt, args);
     va_end(args);
     return std::basic_string<CharT>(buf);
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// 用途:
+//   利用临时对象的语句结束时销毁机制, 格式化产生临时 C 字符串
+// 例子:
+//   _putts(StringMaker<BUF_SIZE, _TCHAR>()(_T("%s %d"), _T("foo"), 42));
+////////////////////////////////////////////////////////////////////////////////
+
+#define SIMP_MAKESTRA(size, fmt, ...)   Simp::StringMaker<size, char>()(fmt, __VA_ARGS__)
+#define SIMP_MAKESTRW(size, fmt, ...)   Simp::StringMaker<size, wchar_t>()(fmt, __VA_ARGS__)
+#define SIMP_MAKESTR(size, fmt, ...)    Simp::StringMaker<size, _TCHAR>()(fmt, __VA_ARGS__)
+
+template <size_t Size, typename CharT>
+struct StringMaker {
+    const _TCHAR* operator()(const CharT* fmt, ...) {
+        va_list args;
+        va_start(args, fmt);
+        vsprintf_t(Str, Size, fmt, args);
+        va_end(args);
+        return Str;
+    }
+
+    CharT Str[Size];
+};
 
 ////////////////////////////////////////////////////////////////////////////////
 // CRT errno 错误消息
@@ -568,7 +592,7 @@ public:
             STAT_INIT,      // 初始状态
             STAT_QUOTED,    // 引号包围状态
             STAT_NOQUOTED,  // 非引号包围状态
-            STAT_ESCAPED,   // 转义状态. 因为只关心引号包围状态下的 \", \' 转义, 所以实际是 QUOTE_ESC_QUOTED 的子状态, 但因为状态关系简单, 所以没用子状态变换的方法
+            STAT_ESCAPED,   // 转义状态. 因为只关心引号包围状态下的 \", \' 转义, 所以实际是 STAT_QUOTED 的子状态, 但因为状态关系简单, 所以没用子状态变换的方法
             STAT_END        // 结束状态
         } stat = STAT_INIT;
         std::basic_streambuf<CharT>::int_type ch;

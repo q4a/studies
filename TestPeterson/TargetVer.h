@@ -1,8 +1,7 @@
 // TargetVer.h
 //
 
-#ifndef __TARGETVER_H__
-#define __TARGETVER_H__
+#pragma once
 
 // 指定目标 Windows 版本的两种方法:
 // 1. 包含 SDKDDKVer.h, 假定目标平台和开发平台的版本相同
@@ -31,5 +30,3 @@
 #if _MSC_VER >= 1600
 #include <SDKDDKVer.h>
 #endif
-
-#endif  // __TARGETVER_H__

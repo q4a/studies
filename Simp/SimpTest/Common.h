@@ -9,6 +9,10 @@
 // 随机数
 ////////////////////////////////////////////////////////////////////////////////
 
+inline void InitRand() {
+    srand((unsigned) time(NULL));
+}
+
 // [min, max)
 inline int RandInt(int min, int max) {
     return (int) ((double) rand() / (RAND_MAX + 1) * (max - min) + min);
@@ -40,7 +44,6 @@ inline UINT64 CPUClock() {
     return __rdtsc();
 }
 
-// 数据量小时内存拷贝很快，CRTClock 识别不到差值
 inline UINT64 CRTClock() {
     return clock();
 }

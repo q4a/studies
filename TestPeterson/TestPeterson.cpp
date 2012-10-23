@@ -21,7 +21,7 @@
 // 名字空间
 ////////////////////////////////////////////////////////////////////////////////
 
-using Simp::LogBaseT;
+using Simp::LogBase;
 namespace LOG_LVL = Simp::LOG_LVL;
 
 namespace S = std;
@@ -39,9 +39,9 @@ using Simp::tcerr;
 _TCHAR* OldWorkDir;
 
 // 日志对象
-LogBaseT<char>*     LogA;
-LogBaseT<wchar_t>*  LogW;
-LogBaseT<_TCHAR>*   Log;
+LogBase<char>*      LogA;
+LogBase<wchar_t>*   LogW;
+LogBase<_TCHAR>*    Log;
 
 ////////////////////////////////////////////////////////////////////////////////
 // 测试用例
@@ -106,7 +106,7 @@ void Init()
     // 设置 CRT 调试输出
     _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
     _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
-    _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_DEBUG);
+    _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_WNDW);
 
     // 设置当前 exe 文件的目录为工作目录
     _TCHAR modDir[BUF_SIZE];
@@ -115,13 +115,9 @@ void Init()
     _tchdir(modDir);
 
     // 设置日志对象
-    LogA = Simp::DebugOutLogT<char>(LOG_LVL::LEVEL_DEBUG, BUF_SIZE);
-    LogW = Simp::DebugOutLogT<wchar_t>(LOG_LVL::LEVEL_DEBUG, BUF_SIZE);
-#ifdef _UNICODE
-    Log = LogW;
-#else
-    Log = LogA;
-#endif
+    LogA = Simp::LogDebugOut<char>::Inst(LOG_LVL::LEVEL_DEBUG, BUF_SIZE);
+    LogW = Simp::LogDebugOut<wchar_t>::Inst(LOG_LVL::LEVEL_DEBUG, BUF_SIZE);
+    Log = Simp::LogDebugOut<_TCHAR>::Inst(LOG_LVL::LEVEL_DEBUG, BUF_SIZE);
 }
 
 // 清理运行环境
