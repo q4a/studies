@@ -52,7 +52,7 @@ struct CharTraits<wchar_t> {
 ////////////////////////////////////////////////////////////////////////////////
 // char/wchar_t 的字符/字符串字面量的统一表示
 // 用途:
-//   在接受 CharType 的模板中保持字符/字符串字面量的写法统一
+//   在接受 CharT 的模板中保持字符/字符串字面量的写法统一
 ////////////////////////////////////////////////////////////////////////////////
 
 // 无一般化定义
@@ -200,13 +200,13 @@ struct CrtStrErr {
 // VC 2005 实测效率: StrNCpy 高于 CRT 的 _tcsncpy_s
 // 模板参数:
 //   AlertTruncated: 为 TRUE 时通过返回值 STRUNCATE 报告源字符截断错误
-template <BOOL AlertTruncated, typename CharType>
+template <BOOL AlertTruncated, typename CharT>
 inline
-errno_t StrNCpyImpl(__out CharType* dst, size_t bufSize, const CharType* src, size_t count) {
+errno_t StrNCpyImpl(__out CharT* dst, size_t bufSize, const CharT* src, size_t count) {
     if (dst == NULL || bufSize == 0 || src == NULL)
         return EINVAL;
 
-    CharType* p = dst;
+    CharT* p = dst;
     size_t i = 0;
     for (; i < count && i < bufSize - 1 && *src != 0; ++i)
         *p++ = *src++;
@@ -219,17 +219,17 @@ errno_t StrNCpyImpl(__out CharType* dst, size_t bufSize, const CharType* src, si
     return 0;
 }
 
-template <typename CharType>
+template <typename CharT>
 inline
-CharType* StrNCpy(__out CharType* dst, size_t bufSize, const CharType* src, size_t count) {
+CharT* StrNCpy(__out CharT* dst, size_t bufSize, const CharT* src, size_t count) {
     if (StrNCpyImpl<FALSE>(dst, bufSize, src, count) != 0)
         return NULL;
     return dst;
 }
 
-template <typename CharType>
+template <typename CharT>
 inline
-errno_t StrNCpyAlert(__out CharType* dst, size_t bufSize, const CharType* src, size_t count) {
+errno_t StrNCpyAlert(__out CharT* dst, size_t bufSize, const CharT* src, size_t count) {
     return StrNCpyImpl<TRUE>(dst, bufSize, src, count);
 }
 
