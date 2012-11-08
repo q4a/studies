@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarbuzzXmlData1", "StarbuzzXmlData1\StarbuzzXmlData1.csproj", "{8FB68DE8-71DE-44FB-A2CC-D2049E1BFE8C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FB68DE8-71DE-44FB-A2CC-D2049E1BFE8C}.Debug|x86.ActiveCfg = Debug|x86
+		{8FB68DE8-71DE-44FB-A2CC-D2049E1BFE8C}.Debug|x86.Build.0 = Debug|x86
+		{8FB68DE8-71DE-44FB-A2CC-D2049E1BFE8C}.Release|x86.ActiveCfg = Release|x86
+		{8FB68DE8-71DE-44FB-A2CC-D2049E1BFE8C}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

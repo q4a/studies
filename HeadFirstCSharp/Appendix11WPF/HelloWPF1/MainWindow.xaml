@@ -1,0 +1,9 @@
+﻿<Window x:Class="HelloWPF1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="184,51,0,0" Name="button1" VerticalAlignment="Top" Width="75" />
+        <Button Content="Button 2" Height="23" Margin="184,97,198,0" Name="button2" VerticalAlignment="Top" Click="button2_Click" />
+    </Grid>
+</Window>
