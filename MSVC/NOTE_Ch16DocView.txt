@@ -1,0 +1,16 @@
+Ch16. 文档与视图的分离
+
+SubCtrl
+使用 SubclassDlgItem(IDC_EDIT1, this) 的动态子类的方法，扩展标准控件 CEdit，见书 P363
+如果要更改 CEdit 的输入字符，需要调用 CEdit::DefWindowProc
+
+StudentForm
+SDI Doc/View 示例，Doc 和 View 类之间 CStudent 对象的存取
+在 Doc 类析构时，通过调用覆盖 CObject::Dump 调试输出 CStudent 内容
+
+StudentForm2
+StudentForm 的改进，使用 CTypedPtrList<CObList, CStudent*> 保存多个 CStudent 对象
+Clear All 的处理 OnEditClearAll 从 View 类放到 Doc 类中，并用 UpdateAllViews 通知所有 View 对象
+CDocument::UpdateAllViews 最终会调用 CView::OnUpdate
+CFormView 虽然不是 CDialog 的派生类，但可以强制转换并使用 CDialog 的一些方法，如：
+((CDialog*) this)->GotoDlgCtrl(GetDlgItem(IDC_NAME));

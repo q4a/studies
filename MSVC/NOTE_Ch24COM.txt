@@ -1,0 +1,4 @@
+Ch24. The Component Object Model
+
+COMSimulate
+以嵌套类的方式（组合）模拟 COM 结构

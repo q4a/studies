@@ -1,0 +1,41 @@
+Ch14. 工具栏和状态栏
+
+--------------------
+MyPaint
+
+工具栏示例
+
+复选标记式工具栏按钮和菜单：
+CMyPaintView::OnDrawPattern 中 m_Pattern ^= 1;
+CMyPaintView::OnUpdateDrawPattern 中 pCmdUI->SetCheck(m_Pattern);
+
+给工具栏按钮的提示字符串（和菜单共享）：status string\ntooltip string
+
+--------------------
+MouseStatus
+
+状态栏操作程序
+
+CStatusBar 默认的 Create 创建的状态栏 ID 为 AFX_IDW_STATUS_BAR，该状态栏的操作（菜单提示、大小写键等）由 MFC 框架负责
+
+自定义状态栏指示：
+
+static UINT indicators[] = {
+    ID_SEPARATOR,
+    ID_SEPARATOR,
+    ID_INDICATOR_LEFT,  // 这是 Resource.h 中自定义的 ID，不是 MFC 预置的
+    ID_INDICATOR_RIGHT
+};
+
+这时需要编写处理查看状态栏菜单的处理：
+CMainFrame::OnViewStatusBar
+CMainFrame::OnUpdateViewStatusBar
+
+--------------------
+MyRebar
+
+IE 重组栏 (Rebar) 程序
+
+在 VC 2005 的 MFC Wizard 中的 User Interface Features 中选择 Toolbars 下的 Browser style
+
+CProgressCtrl::StepIt 对进度条进行递增

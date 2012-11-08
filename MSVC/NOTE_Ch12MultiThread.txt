@@ -1,0 +1,24 @@
+Ch12. Windows Message Processing and Multithreaded Programming
+
+DataRace
+共享全局数据的多线程数据竞争 (Data Race) 问题测试：
+1. WorkThread1 没有临界保护，将出现 Data Race
+2. WorkThread2 使用 InterlockedIncrement 原子操作
+3. WorkThread3 使用 CCriticalSection 临界区对象
+AfxBeginThread 创建线程对象 CWinThread*
+CREATE_SUSPENDED 创建线程时使其开始处于停止状态，以便访问 CWinThread 的数据成员，然后用 CWinThread::ResumeThread 恢复运行。这样做是为了防止线程过快结束，导致访问 CWinThread 的数据成员已无效
+
+ProgBarPeekMsg
+使用 WM_TIME 定时器消息的进度条实现，不使用多线程
+内层消息循环：利用 PeekMessage，不在主消息循环中的消息分发，见 CProgressDlg::OnBnClickedStart
+
+ProgBarWorkThread
+功能和 ProgBarPeekMsg 类似的进度条计算程序
+使用工作线程计算进度条 CProgressDlg::ProgressThread
+计算线程结束时，用 PostMessage 自定义消息通知主线程
+主线程显示进度条位置 CProgressDlg::OnTimer
+
+ProgBarEvent
+改自 ProgBarWorkThread 的工作线程计算进度条程序
+使用 EventStart、EventCancel 两个 CEvent 事件对象启动和中止进度条计算
+CEvent 默认创建的是 nonsignaled 的 autorest 事件

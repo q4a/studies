@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PoemSplit", "PoemSplit\PoemSplit.vcproj", "{50D1F3E7-B795-4CE4-9513-276014659037}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PoemSplit2", "PoemSplit2\PoemSplit2.vcproj", "{8097C53D-5488-439A-89A2-E86BC5119641}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PoemSwitch", "PoemSwitch\PoemSwitch.vcproj", "{3A8E3753-496A-4858-A5F8-FBB083FE60F0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PoemMulti", "PoemMulti\PoemMulti.vcproj", "{E49F4204-315B-401A-A2B5-CBA0D167B935}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50D1F3E7-B795-4CE4-9513-276014659037}.Debug|Win32.ActiveCfg = Debug|Win32
+		{50D1F3E7-B795-4CE4-9513-276014659037}.Debug|Win32.Build.0 = Debug|Win32
+		{50D1F3E7-B795-4CE4-9513-276014659037}.Release|Win32.ActiveCfg = Release|Win32
+		{50D1F3E7-B795-4CE4-9513-276014659037}.Release|Win32.Build.0 = Release|Win32
+		{8097C53D-5488-439A-89A2-E86BC5119641}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8097C53D-5488-439A-89A2-E86BC5119641}.Debug|Win32.Build.0 = Debug|Win32
+		{8097C53D-5488-439A-89A2-E86BC5119641}.Release|Win32.ActiveCfg = Release|Win32
+		{8097C53D-5488-439A-89A2-E86BC5119641}.Release|Win32.Build.0 = Release|Win32
+		{3A8E3753-496A-4858-A5F8-FBB083FE60F0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3A8E3753-496A-4858-A5F8-FBB083FE60F0}.Debug|Win32.Build.0 = Debug|Win32
+		{3A8E3753-496A-4858-A5F8-FBB083FE60F0}.Release|Win32.ActiveCfg = Release|Win32
+		{3A8E3753-496A-4858-A5F8-FBB083FE60F0}.Release|Win32.Build.0 = Release|Win32
+		{E49F4204-315B-401A-A2B5-CBA0D167B935}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E49F4204-315B-401A-A2B5-CBA0D167B935}.Debug|Win32.Build.0 = Debug|Win32
+		{E49F4204-315B-401A-A2B5-CBA0D167B935}.Release|Win32.ActiveCfg = Release|Win32
+		{E49F4204-315B-401A-A2B5-CBA0D167B935}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

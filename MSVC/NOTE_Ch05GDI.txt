@@ -1,0 +1,10 @@
+Ch5. The Graphics Device Interface, Colors, and Fonts
+
+ScrollWnd
+CScrollView，映射模式转换，鼠标点击测试，CScrollView::SetScrollSizes
+
+FontAutoSize
+TrueType 和点阵字体的文字显示，根据窗口的大小自动改变字体大小
+
+FontLogicalTWIP
+逻辑字体大小，逻辑 TWIP 映射

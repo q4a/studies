@@ -1,0 +1,13 @@
+Ch11. Bitmaps
+
+BmpRes
+从资源加载 bmp，用双缓冲机制 blit 到设备 DC 上
+
+DBufScroll
+双缓冲 + Scroll View，鼠标拖动绘制图形 (PatBlt, BitBlt)
+
+StretchBmp
+双缓冲 + Scroll View，从资源加载 bmp，显示拉伸位图 (SetStretchBltMode, StretchBlt)
+
+ShowBmp
+从 .bmp 文件加载位图，DIB 操作类 CDib

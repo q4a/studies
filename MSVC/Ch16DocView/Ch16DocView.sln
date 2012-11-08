@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SubCtrl", "SubCtrl\SubCtrl.vcproj", "{02FF4913-7960-42BB-889D-AB92400BB9F5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StudentForm", "StudentForm\StudentForm.vcproj", "{9B98F5E2-813B-4234-B655-521424101885}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StudentForm2", "StudentForm2\StudentForm2.vcproj", "{CA1ABDEF-D005-4798-9FBA-EAD2C3DA27A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02FF4913-7960-42BB-889D-AB92400BB9F5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{02FF4913-7960-42BB-889D-AB92400BB9F5}.Debug|Win32.Build.0 = Debug|Win32
+		{02FF4913-7960-42BB-889D-AB92400BB9F5}.Release|Win32.ActiveCfg = Release|Win32
+		{02FF4913-7960-42BB-889D-AB92400BB9F5}.Release|Win32.Build.0 = Release|Win32
+		{9B98F5E2-813B-4234-B655-521424101885}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9B98F5E2-813B-4234-B655-521424101885}.Debug|Win32.Build.0 = Debug|Win32
+		{9B98F5E2-813B-4234-B655-521424101885}.Release|Win32.ActiveCfg = Release|Win32
+		{9B98F5E2-813B-4234-B655-521424101885}.Release|Win32.Build.0 = Release|Win32
+		{CA1ABDEF-D005-4798-9FBA-EAD2C3DA27A5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CA1ABDEF-D005-4798-9FBA-EAD2C3DA27A5}.Debug|Win32.Build.0 = Debug|Win32
+		{CA1ABDEF-D005-4798-9FBA-EAD2C3DA27A5}.Release|Win32.ActiveCfg = Release|Win32
+		{CA1ABDEF-D005-4798-9FBA-EAD2C3DA27A5}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,10 @@
+Ch19. 打印和打印预览
+
+--------------------
+PrintPoem
+
+CScrollView 滚动视图
+以 MM_TWIPS 映射方式和 10-point Times New Roman 字体打印文本
+
+书 P466 有作者改造的 CLogScrollView 类，可以使打印预览的文本更大些
+P467 重载 OnPrint，使用 CPrintInfo 读取打印机的矩形区域

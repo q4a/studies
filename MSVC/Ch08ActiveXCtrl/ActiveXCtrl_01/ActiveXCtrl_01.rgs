@@ -1,0 +1,10 @@
+HKCR {
+    NoRemove AppID
+    {
+        '%APPID%' = s 'ActiveXCtrl_01'
+        'ActiveXCtrl_01.EXE'
+        {
+            val AppID = s '%APPID%'
+        }
+    }
+}

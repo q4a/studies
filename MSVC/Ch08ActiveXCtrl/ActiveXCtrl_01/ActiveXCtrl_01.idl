@@ -1,0 +1,18 @@
+// ActiveXCtrl_01.idl : IDL source for ActiveXCtrl_01
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (ActiveXCtrl_01.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    uuid(D1DFAC78-75CE-4815-9AC3-EA539B5FAE9B),
+    version(1.0),
+    helpstring("ActiveXCtrl_01 1.0 Type Library")
+]
+library ActiveXCtrl_01Lib
+{
+    importlib("stdole2.tlb");
+};

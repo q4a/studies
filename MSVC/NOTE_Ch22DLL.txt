@@ -1,0 +1,28 @@
+Ch22. 动态链接库
+
+--------------------
+PersistFrame
+
+将 Ch15Frame\PersistWnd 中的可复用类 CPersistFrame (PersistFrm.h/cpp) 构造成一个 DLL
+
+--------------------
+PersistWnd
+
+PersistFrame、SquareRoot、Ryg DLL 的用户 EXE
+
+--------------------
+SquareRoot
+
+MFC Regular DLL 示例
+每个调用 MFC 功能的导出函数，都应该以 AFX_MANAGE_STATE(AfxGetStaticModuleState()) 打头
+这是因为 MFC Regular DLL 不同于 MFC EXE 和 MFC Extension DLL，MFC 全局变量无法同步（当动态链接 MFC 时）
+如果 MFC Regular DLL 静态链接 MFC，AFX_MANAGE_STATE 宏没有作用（空宏）
+
+--------------------
+Ryg
+
+一个红绿灯控件，继承自 CWnd
+
+导出哑函数 void LoadRyg() 促使用户程序加载 Ryg DLL（隐式链接）
+
+控件的窗口过程 AFX_EXPORT CRygCtrl::RygWndProc 中调用 AfxCallWndProc，将消息发送到 MFC 框架
