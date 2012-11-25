@@ -157,40 +157,22 @@ BOOL GU::Game_Init(HWND window) {
     }
 
     // create background
-    HRESULT result =
-        g_D3DDev->CreateOffscreenPlainSurface(
-            BUFFERW,
-            BUFFERH,
-            D3DFMT_X8R8G8B8,
-            D3DPOOL_DEFAULT,
-            &g_Background,
-            NULL);
+    HRESULT result = g_D3DDev->CreateOffscreenPlainSurface(BUFFERW, BUFFERH, D3DFMT_X8R8G8B8, D3DPOOL_DEFAULT, &g_Background, NULL);
     if (result != D3D_OK) return FALSE;
 
     // copy image to upper left corner of background
     RECT source_rect = {0, 0, SCREENW, SCREENH };
     RECT dest_ul = { 0, 0, SCREENW, SCREENH };
 
-    g_D3DDev->StretchRect(
-        image,
-        &source_rect,
-        g_Background,
-        &dest_ul,
-        D3DTEXF_NONE);
+    g_D3DDev->StretchRect(image, &source_rect, g_Background, &dest_ul, D3DTEXF_NONE);
 
     // copy image to upper right corner of background
     RECT dest_ur = { SCREENW, 0, SCREENW*2, SCREENH };
 
-    g_D3DDev->StretchRect(
-        image,
-        &source_rect,
-        g_Background,
-        &dest_ur,
-        D3DTEXF_NONE);
+    g_D3DDev->StretchRect(image, &source_rect, g_Background, &dest_ur, D3DTEXF_NONE);
 
     // get pointer to the back buffer
-    g_D3DDev->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO,
-                            &g_BackBuffer);
+    g_D3DDev->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &g_BackBuffer);
 
     // remove image
     image->Release();
@@ -215,7 +197,6 @@ void GU::Game_End() {
     DirectSound_Shutdown();
     DirectInput_Shutdown();
     Direct3D_Shutdown();
-
 }
 
 template <class T>
@@ -229,8 +210,7 @@ String static ToString(const T & t, int places = 2) {
 
 void MovePlayer(float movex, float movey) {
     // cannot move while overloading!
-    if (g_PlayerState == OVERLOADING
-            || g_PlayerStatePrev == OVERLOADING)
+    if (g_PlayerState == OVERLOADING || g_PlayerStatePrev == OVERLOADING)
         return;
 
     float multi = 4.0f;
@@ -319,8 +299,7 @@ BOOL PlayerOverload() {
     g_Bullets[b1].vely = 0.0f;
     g_Bullets[b1].rotation = (float) (rand() % 360);
     g_Bullets[b1].x = g_Player.x + g_Player.width;
-    g_Bullets[b1].y = g_Player.y + g_Player.height / 2
-                      - g_Bullets[b1].height / 2;
+    g_Bullets[b1].y = g_Player.y + g_Player.height / 2 - g_Bullets[b1].height / 2;
     g_Bullets[b1].y += (float) (rand() % 20 - 10);
 
     return TRUE;
@@ -527,7 +506,6 @@ void GU::Game_Run(HWND window) {
         g_CoreTime = g_CurrentTime;
     }
 
-
     // run update on normal processes (like input) at 60 hz
 
     if (g_CurrentTime > g_Refresh + 14) {
@@ -623,8 +601,8 @@ void GU::Game_Run(HWND window) {
                     // move horiz based on x velocity
                     g_Viruses[n].x += g_Viruses[n].velx;
                     if (g_Viruses[n].x < -96.0f)
-                        g_Viruses[n].x = (float)VIRTUAL_LEVEL_SIZE;
-                    if (g_Viruses[n].x > (float)VIRTUAL_LEVEL_SIZE)
+                        g_Viruses[n].x = (float) VIRTUAL_LEVEL_SIZE;
+                    if (g_Viruses[n].x > (float) VIRTUAL_LEVEL_SIZE)
                         g_Viruses[n].x = -96.0f;
 
                     // move vert based on y velocity
@@ -677,8 +655,8 @@ void GU::Game_Run(HWND window) {
                         // after scooping up a fragment, check for collision
                         if (CollisionD(g_Player, g_Fragments[n])) {
                             AddEnergy(2.0);
-                            g_Fragments[n].x = (float)(3000 + rand() % 1000);
-                            g_Fragments[n].y = (float)(rand() % SCREENH);
+                            g_Fragments[n].x = (float) (3000 + rand() % 1000);
+                            g_Fragments[n].y = (float) (rand() % SCREENH);
                         }
                     }
                 }
@@ -738,12 +716,11 @@ void GU::Game_Run(HWND window) {
     RECT source_rect = {
         (long) g_ScrollX,
         (long) g_ScrollY,
-        (long) g_ScrollX+SCREENW,
-        (long) g_ScrollY+SCREENH
+        (long) g_ScrollX + SCREENW,
+        (long) g_ScrollY + SCREENH
     };
     RECT dest_rect = { 0, 0, SCREENW, SCREENH};
-    g_D3DDev->StretchRect(g_Background, &source_rect, g_BackBuffer,
-                          &dest_rect, D3DTEXF_NONE);
+    g_D3DDev->StretchRect(g_Background, &source_rect, g_BackBuffer, &dest_rect, D3DTEXF_NONE);
 
     // begin rendering
     if (g_D3DDev->BeginScene()) {
