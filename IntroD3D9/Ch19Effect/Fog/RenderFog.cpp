@@ -16,7 +16,7 @@ const DWORD FogVertex::FVF = D3DFVF_XYZ | D3DFVF_TEX3;
 ////////////////////////////////////////////////////////////////////////////////
 
 LPCTSTR RenderFog::HeightMapFile = _T("coastMountain64.raw");
-LPCTSTR RenderFog::FogEffectFile = _T("fog.txt");
+LPCTSTR RenderFog::FogEffectFile = _T("fog.fx");
 
 BOOL RenderFog::Init(UINT width, UINT height, HWND hwnd, BOOL windowed, D3DDEVTYPE devType) {
     HRESULT hr = Render::Init(width, height, hwnd, windowed, devType);

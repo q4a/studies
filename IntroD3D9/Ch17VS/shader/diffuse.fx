@@ -1,13 +1,13 @@
 ////////////////////////////////////////////////////////////////////////////
-// 
-// File: diffuse.txt
-// 
+//
+// File: diffuse.fx
+//
 // Author: Frank Luna (C) All Rights Reserved
 //
-// System: AMD Athlon 1800+ XP, 512 DDR, Geforce 3, Windows XP, MSVC++ 7.0 
+// System: AMD Athlon 1800+ XP, 512 DDR, Geforce 3, Windows XP, MSVC++ 7.0
 //
 // Desc: Vertex shader that does diffuse lighting.
-//          
+//
 ////////////////////////////////////////////////////////////////////////////
 
 //
@@ -62,13 +62,13 @@ VS_OUTPUT Main(VS_INPUT input)
 
     //
     // Transform position to homogeneous clip space
-    // and store in the output.position member. 
+    // and store in the output.position member.
     //
     output.position = mul(input.position, ViewProjMatrix);
 
     //
     // Transform lights and normals to view space.  Set w
-    // componentes to zero since we're transforming vectors 
+    // componentes to zero since we're transforming vectors
     // here and not points.
     //
     LightDirection.w = 0.0f;
@@ -87,15 +87,15 @@ VS_OUTPUT Main(VS_INPUT input)
     // Thus, if the angle is greater than 90 degrees we set
     // s to zero so that the surface will not be lit.
     //
-    if( s < 0.0f )
+    if (s < 0.0f)
         s = 0.0f;
 
     //
-    // Ambient light reflected is computed by performing a 
+    // Ambient light reflected is computed by performing a
     // component wise multiplication with the ambient material
     // vector and the ambient light intensity vector.
     //
-    // Diffuse light reflected is computed by performing a 
+    // Diffuse light reflected is computed by performing a
     // component wise multiplication with the diffuse material
     // vector and the diffuse light intensity vector.  Further
     // we scale each component by the shading scalar s, which
@@ -104,11 +104,10 @@ VS_OUTPUT Main(VS_INPUT input)
     //
     // The sum of both the ambient and diffuse components gives
     // us our final vertex color.
-    // 
+    //
 
-    output.diffuse = (AmbientMtrl * AmbientLightIntensity) +
-                     (s * (DiffuseLightIntensity * DiffuseMtrl));
-    
+    output.diffuse = (AmbientMtrl * AmbientLightIntensity) + (s * (DiffuseLightIntensity * DiffuseMtrl));
+
     return output;
 }
 

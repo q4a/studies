@@ -16,7 +16,7 @@ const DWORD ToonVertex::FVF = D3DFVF_XYZ | D3DFVF_TEX3;
 ////////////////////////////////////////////////////////////////////////////////
 
 LPCTSTR RenderToon::ToonShadeTexFile = _T("toonshade.bmp");
-LPCTSTR RenderToon::ToonEffectFile = _T("tooneffect.txt");
+LPCTSTR RenderToon::ToonEffectFile = _T("tooneffect.fx");
 
 BOOL RenderToon::Init(UINT width, UINT height, HWND hwnd, BOOL windowed, D3DDEVTYPE devType) {
     HRESULT hr = Render::Init(width, height, hwnd, windowed, devType);

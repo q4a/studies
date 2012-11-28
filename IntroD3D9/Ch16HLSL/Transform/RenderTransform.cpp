@@ -96,7 +96,7 @@ void BasicScene::Draw(float scale) {
 ////////////////////////////////////////////////////////////////////////////////
 
 LPCTSTR RenderTransform::MeshDumpFile = _T("MeshDump.txt");
-LPCTSTR RenderTransform::VertexShaderFile = _T("transform.txt");
+LPCTSTR RenderTransform::VertexShaderFile = _T("transform.fx");
 
 BOOL RenderTransform::Init(UINT width, UINT height, HWND hwnd, BOOL windowed, D3DDEVTYPE devType) {
     HRESULT hr = Render::Init(width, height, hwnd, windowed, devType);

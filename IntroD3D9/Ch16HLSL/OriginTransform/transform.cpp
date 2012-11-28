@@ -53,7 +53,7 @@ bool Setup() {
     ID3DXBuffer* errorBuffer = 0;
 
     hr = D3DXCompileShaderFromFile(
-             "transform.txt",
+             "transform.fx",
              0,
              0,
              "Main",  // entry point function name

@@ -9,8 +9,8 @@
 // ‰÷»æ¿‡ RenderToon2
 ////////////////////////////////////////////////////////////////////////////////
 
-LPCTSTR RenderToon2::ToonVSFile = _T("toon.txt");
-LPCTSTR RenderToon2::OutlineVSFile = _T("outline.txt");
+LPCTSTR RenderToon2::ToonVSFile = _T("toon.fx");
+LPCTSTR RenderToon2::OutlineVSFile = _T("outline.fx");
 LPCTSTR RenderToon2::ToonShadeTexFile = _T("toonshade.bmp");
 
 BOOL RenderToon2::Init(UINT width, UINT height, HWND hwnd, BOOL windowed, D3DDEVTYPE devType) {

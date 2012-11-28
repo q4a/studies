@@ -10,7 +10,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 LPCTSTR RenderLightTex::ModelFile = _T("mountain.x");
-LPCTSTR RenderLightTex::LightTexEffectFile = _T("light_tex.txt");
+LPCTSTR RenderLightTex::LightTexEffectFile = _T("light_tex.fx");
 LPCTSTR RenderLightTex::TexFile = _T("Terrain_3x_diffcol.jpg");
 
 BOOL RenderLightTex::Init(UINT width, UINT height, HWND hwnd, BOOL windowed, D3DDEVTYPE devType) {
@@ -168,7 +168,7 @@ void RenderLightTex::Draw(float timeDelta) {
 
     for (UINT i = 0; i < numPasses; ++i) {
         m_LightTexEffect->BeginPass(i);
-        for(UINT j = 0; j < m_Mtrls.size(); ++j)
+        for (UINT j = 0; j < m_Mtrls.size(); ++j)
             m_Mesh->DrawSubset(j);
         m_LightTexEffect->EndPass();
     }

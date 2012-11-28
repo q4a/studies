@@ -15,7 +15,7 @@ const DWORD MultiTexVertex::FVF = D3DFVF_XYZ | D3DFVF_TEX3;
 // ‰÷»æ¿‡ RenderMultiTex
 ////////////////////////////////////////////////////////////////////////////////
 
-LPCTSTR RenderMultiTex::MultiTexPSFile = _T("ps_multitex.txt");
+LPCTSTR RenderMultiTex::MultiTexPSFile = _T("ps_multitex.fx");
 LPCTSTR RenderMultiTex::BaseTexFile = _T("crate.bmp");
 LPCTSTR RenderMultiTex::SpotLightTexFile = _T("spotlight.bmp");
 LPCTSTR RenderMultiTex::StringTexFile = _T("text.bmp");

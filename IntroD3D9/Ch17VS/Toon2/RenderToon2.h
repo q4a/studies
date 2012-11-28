@@ -19,7 +19,6 @@ public:
     RenderToon2() {}
     BOOL Init(UINT width, UINT height, HWND hwnd, BOOL windowed, D3DDEVTYPE devType);
     BOOL InitFont();
-    void DumpMesh(LPCTSTR fname, ID3DXMesh* mesh);
 
     virtual void Draw(float timeDelta);
 
