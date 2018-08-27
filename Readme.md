@@ -1,6 +1,4 @@
-studies
-==========
+# studies
 
-My Study and Test Contents:
-
+My Study and Test Contents:  
 Snippets, Samples, Practices, Experimental Projects.
