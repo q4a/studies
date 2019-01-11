@@ -1,4 +1,4 @@
 # studies
 
-My Study and Test Contents:  
-Snippets, Samples, Practices, Experimental Projects.
+This repo is used to archive my study and test contents, such as:  
+snippets, samples, practices and experimental projects.
