@@ -74,7 +74,7 @@ $(TARGET_DIR)\vc??.pch
 ################################################################################
 
 all: pre-build $(TARGET)
-	@echo Building: $(MODULE) [config=$(config)]
+	@echo Build: $(MODULE) [config=$(config)]
 
 pre-build:
 	@echo Pre-build:

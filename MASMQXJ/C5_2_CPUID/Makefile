@@ -63,7 +63,7 @@ $(TARGET_DIR)\$(MODULE_NAME).ilk
 ################################################################################
 
 all: pre-build $(TARGET)
-	@echo Building: $(MODULE) [config=$(config)]
+	@echo Build: $(MODULE) [config=$(config)]
 
 pre-build:
 	@echo Pre-build:
