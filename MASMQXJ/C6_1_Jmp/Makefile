@@ -42,28 +42,26 @@ LDFLAGS = /NOLOGO /SUBSYSTEM:CONSOLE $(LDFLAGS)
 # Names
 ################################################################################
 
-MODULE_SUFFIX = .exe
-MODULE_NAME = TestJmp
-MODULE = $(MODULE_NAME)$(MODULE_SUFFIX)
+BIN = TestJmp.exe
 TARGET_DIR = $(config)
-TARGET = $(TARGET_DIR)\$(MODULE)
+TARGET = $(TARGET_DIR)\$(BIN)
 
 OBJS = \
-$(TARGET_DIR)\$(MODULE_NAME).obj
+$(TARGET_DIR)\TestJmp.obj
 
 # Additional and intermediate output files
 # such as .lst (Assembled Code Listing), .pdb (Program Database), .ilk (Incremental Linker File), .idb (Minimal Rebuild)
 INTS = \
-$(TARGET_DIR)\$(MODULE_NAME).lst \
-$(TARGET_DIR)\$(MODULE_NAME).pdb \
-$(TARGET_DIR)\$(MODULE_NAME).ilk
+$(TARGET_DIR)\TestJmp.lst \
+$(TARGET_DIR)\TestJmp.pdb \
+$(TARGET_DIR)\TestJmp.ilk
 
 ################################################################################
 # Build Rules
 ################################################################################
 
 all: pre-build $(TARGET)
-	@echo Build: $(MODULE) [config=$(config)]
+	@echo Build: $(BIN) [config=$(config)]
 
 pre-build:
 	@echo Pre-build:

@@ -45,36 +45,34 @@ LDFLAGS = /NOLOGO /SUBSYSTEM:CONSOLE /DEBUG /LIBPATH:$(DEPENDS_DIR) $(LDFLAGS)
 # Names
 ################################################################################
 
-MODULE_SUFFIX = .exe
-MODULE_NAME = TestModule
-MODULE = $(MODULE_NAME)$(MODULE_SUFFIX)
+BIN = TestModule.exe
 TARGET_DIR = $(config)
-TARGET = $(TARGET_DIR)\$(MODULE)
+TARGET = $(TARGET_DIR)\$(BIN)
 
 OBJS = \
 $(TARGET_DIR)\StdAfx.obj \
 $(TARGET_DIR)\StdStream.obj \
 $(TARGET_DIR)\StrHelper.obj \
 $(TARGET_DIR)\Euclid.obj \
-$(TARGET_DIR)\$(MODULE_NAME).obj
+$(TARGET_DIR)\TestModule.obj
 
 # Additional and intermediate output files
 # such as .lst (Assembled Code Listing), .pdb (Program Database), .ilk (Incremental Linker File), .idb (Minimal Rebuild), .pch (Precompiled Header)
 INTS = \
-$(TARGET_DIR)\$(MODULE_NAME).lst \
-$(TARGET_DIR)\$(MODULE_NAME).pdb \
-$(TARGET_DIR)\$(MODULE_NAME).ilk \
+$(TARGET_DIR)\TestModule.lst \
+$(TARGET_DIR)\TestModule.pdb \
+$(TARGET_DIR)\TestModule.ilk \
 $(TARGET_DIR)\Euclid.lst \
-$(TARGET_DIR)\vc??.idb \
-$(TARGET_DIR)\vc??.pdb \
-$(TARGET_DIR)\vc??.pch
+$(TARGET_DIR)\vc*.idb \
+$(TARGET_DIR)\vc*.pdb \
+$(TARGET_DIR)\vc*.pch
 
 ################################################################################
 # Build Rules
 ################################################################################
 
 all: pre-build $(TARGET)
-	@echo Build: $(MODULE) [config=$(config)]
+	@echo Build: $(BIN) [config=$(config)]
 
 pre-build:
 	@echo Pre-build:
