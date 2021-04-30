@@ -30,7 +30,7 @@ config = Debug
 !message Config-specific makefile: $(config).mak
 !include $(config).mak
 
-SRC_DIR = HelloAsm
+SRC_DIR = Hello
 
 INCLUDES = /I. /I$(SRC_DIR)
 AFLAGS = /nologo /c /coff $(INCLUDES) $(AFLAGS)
@@ -42,19 +42,19 @@ LDFLAGS = /NOLOGO /SUBSYSTEM:CONSOLE $(LDFLAGS)
 # Names
 ################################################################################
 
-BIN = HelloAsm.exe
+BIN = Hello.exe
 TARGET_DIR = $(config)
 TARGET = $(TARGET_DIR)\$(BIN)
 
 OBJS = \
-$(TARGET_DIR)\HelloAsm.obj
+$(TARGET_DIR)\Hello.obj
 
 # Additional and intermediate output files
 # such as .lst (Assembled Code Listing), .pdb (Program Database), .ilk (Incremental Linker File), .idb (Minimal Rebuild)
 INTS = \
-$(TARGET_DIR)\HelloAsm.lst \
-$(TARGET_DIR)\HelloAsm.pdb \
-$(TARGET_DIR)\HelloAsm.ilk
+$(TARGET_DIR)\Hello.lst \
+$(TARGET_DIR)\Hello.pdb \
+$(TARGET_DIR)\Hello.ilk
 
 ################################################################################
 # Build Rules
