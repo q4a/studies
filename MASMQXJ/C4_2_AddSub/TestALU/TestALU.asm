@@ -1,4 +1,4 @@
-; TestALU.asm
+﻿; TestALU.asm
 ;
 
 ; .686, .model flat, stdcall

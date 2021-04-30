@@ -1,9 +1,8 @@
-; TestExpr.asm
+﻿; TestExpr.asm
 ;
 
 ; IO 子程序声明
-; .686
-; .model flat, stdcall
+; .686, .model flat, stdcall
 include io32.inc
 
 .const

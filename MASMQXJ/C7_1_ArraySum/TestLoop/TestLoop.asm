@@ -1,8 +1,8 @@
-; TestLoop.asm
+﻿; TestLoop.asm
 ;
 
-; .686, .model flat, stdcall
 ; IO 子程序声明
+; .686, .model flat, stdcall
 include io32.inc
 
 .data

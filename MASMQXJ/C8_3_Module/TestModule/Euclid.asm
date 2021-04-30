@@ -1,4 +1,4 @@
-; Euclid.asm
+﻿; Euclid.asm
 ;
 
 ifndef __WIN64__
