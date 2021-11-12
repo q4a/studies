@@ -1,0 +1,12 @@
+Ch15. 可重用的 Frame Window 基类
+
+--------------------
+PersistWnd
+
+可复用的框架类 CPersistFrame (PersistFrm.h/cpp)
+
+CPersistFrame 利用注册表保存框架窗口的大小、位置和最大、最小化状态
+
+CWinApp::InitInstance 中调用 SetRegistryKey 设置保存的注册表位置
+CWinApp 的 WriteProfileString、GetProfileString 存取设置
+

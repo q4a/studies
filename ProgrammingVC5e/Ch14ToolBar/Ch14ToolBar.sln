@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyPaint", "MyPaint\MyPaint.vcproj", "{CA21990B-0E55-4C6A-ABD8-D9E2300FFFB4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MouseStatus", "MouseStatus\MouseStatus.vcproj", "{1873E269-9790-4181-9BB8-DA029D741F93}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyRebar", "MyRebar\MyRebar.vcproj", "{7C380B75-E2D4-4D3A-A74C-CFE6FFB89C1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA21990B-0E55-4C6A-ABD8-D9E2300FFFB4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CA21990B-0E55-4C6A-ABD8-D9E2300FFFB4}.Debug|Win32.Build.0 = Debug|Win32
+		{CA21990B-0E55-4C6A-ABD8-D9E2300FFFB4}.Release|Win32.ActiveCfg = Release|Win32
+		{CA21990B-0E55-4C6A-ABD8-D9E2300FFFB4}.Release|Win32.Build.0 = Release|Win32
+		{1873E269-9790-4181-9BB8-DA029D741F93}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1873E269-9790-4181-9BB8-DA029D741F93}.Debug|Win32.Build.0 = Debug|Win32
+		{1873E269-9790-4181-9BB8-DA029D741F93}.Release|Win32.ActiveCfg = Release|Win32
+		{1873E269-9790-4181-9BB8-DA029D741F93}.Release|Win32.Build.0 = Release|Win32
+		{7C380B75-E2D4-4D3A-A74C-CFE6FFB89C1B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7C380B75-E2D4-4D3A-A74C-CFE6FFB89C1B}.Debug|Win32.Build.0 = Debug|Win32
+		{7C380B75-E2D4-4D3A-A74C-CFE6FFB89C1B}.Release|Win32.ActiveCfg = Release|Win32
+		{7C380B75-E2D4-4D3A-A74C-CFE6FFB89C1B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

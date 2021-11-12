@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventChain", "EventChain\EventChain.csproj", "{4E4ED3F0-3994-4CB8-8C58-468060E403E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delegate1", "Delegate1\Delegate1.csproj", "{6BA18577-F57C-4923-A3D8-DF8A1841723A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E4ED3F0-3994-4CB8-8C58-468060E403E3}.Debug|x86.ActiveCfg = Debug|x86
+		{4E4ED3F0-3994-4CB8-8C58-468060E403E3}.Debug|x86.Build.0 = Debug|x86
+		{4E4ED3F0-3994-4CB8-8C58-468060E403E3}.Release|x86.ActiveCfg = Release|x86
+		{4E4ED3F0-3994-4CB8-8C58-468060E403E3}.Release|x86.Build.0 = Release|x86
+		{6BA18577-F57C-4923-A3D8-DF8A1841723A}.Debug|x86.ActiveCfg = Debug|x86
+		{6BA18577-F57C-4923-A3D8-DF8A1841723A}.Debug|x86.Build.0 = Debug|x86
+		{6BA18577-F57C-4923-A3D8-DF8A1841723A}.Release|x86.ActiveCfg = Release|x86
+		{6BA18577-F57C-4923-A3D8-DF8A1841723A}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

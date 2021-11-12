@@ -1,0 +1,17 @@
+Ch13. Menus, Keyboard Accelerators, the Rich Edit Control, and Property Sheets
+
+--------------------
+RichEdit1
+
+RichEditCtrl 控件嵌在 CView 中，同步变化大小
+
+读写 CView 文本到 CDocument 的字符串成员中
+
+UPDATE_COMMAND_UI 更新菜单 UI
+
+--------------------
+ContextMenu1
+
+右键弹出菜单，由 CMenu::TrackPopupMenu 完成功能
+
+见 CClientView::OnContextMenu

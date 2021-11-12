@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swindler", "Swindler\Swindler.csproj", "{34A91426-564D-48CF-9F9B-42AE193F5A0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadSwindler", "ReadSwindler\ReadSwindler.csproj", "{117B74F7-BE6A-44DE-A2C1-8063DAB3D295}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleEditor", "SimpleEditor\SimpleEditor.csproj", "{736A35A5-03C4-44A0-A50A-1C6F56311B0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexDumper", "HexDumper\HexDumper.csproj", "{C25E6BF4-A482-4AC7-B253-678083BE185A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34A91426-564D-48CF-9F9B-42AE193F5A0D}.Debug|x86.ActiveCfg = Debug|x86
+		{34A91426-564D-48CF-9F9B-42AE193F5A0D}.Debug|x86.Build.0 = Debug|x86
+		{34A91426-564D-48CF-9F9B-42AE193F5A0D}.Release|x86.ActiveCfg = Release|x86
+		{34A91426-564D-48CF-9F9B-42AE193F5A0D}.Release|x86.Build.0 = Release|x86
+		{117B74F7-BE6A-44DE-A2C1-8063DAB3D295}.Debug|x86.ActiveCfg = Debug|x86
+		{117B74F7-BE6A-44DE-A2C1-8063DAB3D295}.Debug|x86.Build.0 = Debug|x86
+		{117B74F7-BE6A-44DE-A2C1-8063DAB3D295}.Release|x86.ActiveCfg = Release|x86
+		{117B74F7-BE6A-44DE-A2C1-8063DAB3D295}.Release|x86.Build.0 = Release|x86
+		{736A35A5-03C4-44A0-A50A-1C6F56311B0F}.Debug|x86.ActiveCfg = Debug|x86
+		{736A35A5-03C4-44A0-A50A-1C6F56311B0F}.Debug|x86.Build.0 = Debug|x86
+		{736A35A5-03C4-44A0-A50A-1C6F56311B0F}.Release|x86.ActiveCfg = Release|x86
+		{736A35A5-03C4-44A0-A50A-1C6F56311B0F}.Release|x86.Build.0 = Release|x86
+		{C25E6BF4-A482-4AC7-B253-678083BE185A}.Debug|x86.ActiveCfg = Debug|x86
+		{C25E6BF4-A482-4AC7-B253-678083BE185A}.Debug|x86.Build.0 = Debug|x86
+		{C25E6BF4-A482-4AC7-B253-678083BE185A}.Release|x86.ActiveCfg = Release|x86
+		{C25E6BF4-A482-4AC7-B253-678083BE185A}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

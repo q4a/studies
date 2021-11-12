@@ -1,0 +1,6 @@
+; SquareRoot.def : Declares the module parameters for the DLL.
+
+LIBRARY      "SquareRoot"
+
+EXPORTS
+    ; Explicit exports can go here

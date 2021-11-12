@@ -1,0 +1,24 @@
+####################
+# Windows
+####################
+
+[Tt]humbs.db
+[Dd]esktop.ini
+
+####################
+# MASM and MSVC
+####################
+
+*.obj
+*.idb
+*.pdb
+*.pch
+*.ilk
+*.log
+*.sbr
+*.lst
+*.exe
+*.dll
+*.lib
+[Dd]ebug/
+[Rr]elease/

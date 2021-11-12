@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScrollWnd", "ScrollWnd\ScrollWnd.vcproj", "{6AC807BD-285C-4111-8907-453762371F6E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FontAutoSize", "FontAutoSize\FontAutoSize.vcproj", "{A587F4CF-1C68-4987-B70C-DEF7B5343602}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FontLogicalTWIP", "FontLogicalTWIP\FontLogicalTWIP.vcproj", "{8885A43C-CF0D-4A21-9A35-615092DE93FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AC807BD-285C-4111-8907-453762371F6E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6AC807BD-285C-4111-8907-453762371F6E}.Debug|Win32.Build.0 = Debug|Win32
+		{6AC807BD-285C-4111-8907-453762371F6E}.Release|Win32.ActiveCfg = Release|Win32
+		{6AC807BD-285C-4111-8907-453762371F6E}.Release|Win32.Build.0 = Release|Win32
+		{A587F4CF-1C68-4987-B70C-DEF7B5343602}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A587F4CF-1C68-4987-B70C-DEF7B5343602}.Debug|Win32.Build.0 = Debug|Win32
+		{A587F4CF-1C68-4987-B70C-DEF7B5343602}.Release|Win32.ActiveCfg = Release|Win32
+		{A587F4CF-1C68-4987-B70C-DEF7B5343602}.Release|Win32.Build.0 = Release|Win32
+		{8885A43C-CF0D-4A21-9A35-615092DE93FB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8885A43C-CF0D-4A21-9A35-615092DE93FB}.Debug|Win32.Build.0 = Debug|Win32
+		{8885A43C-CF0D-4A21-9A35-615092DE93FB}.Release|Win32.ActiveCfg = Release|Win32
+		{8885A43C-CF0D-4A21-9A35-615092DE93FB}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

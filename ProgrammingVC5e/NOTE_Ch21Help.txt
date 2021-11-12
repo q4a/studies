@@ -1,0 +1,18 @@
+Ch21. 上下文相关帮助
+
+--------------------
+PoemMulti
+
+对 Ch20MultiView\PoemMulti 增加 HTML 帮助支持 (chm)
+
+chm 帮助编译工具会自动将新的菜单 ID 变换为 HID，在 HTMLDefines.h 中，如：
+#define HID_WINDOW_NEWSTRINGWINDOW              0x18003
+#define HID_WINDOW_NEWHEXWINDOW                 0x18004
+
+在 PoemMulti.hhp 的 [FILES] 中加入新的帮助主题 (help topics) html 页面：
+hid_window_newstringwindow.htm
+hid_window_newhexwindow.htm
+
+在 PoemMulti.hhp 的 [ALIAS] 中加入：
+hid_window_newstringwindow  = hid_window_newstringwindow.htm
+hid_window_newhexwindow     = hid_window_newhexwindow.htm

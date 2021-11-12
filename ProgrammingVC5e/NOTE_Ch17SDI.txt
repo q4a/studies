@@ -1,0 +1,9 @@
+Ch17. 读写文档：SDI 应用程序
+
+--------------------
+StudentInfo
+读写 Student 列表数据的 SDI 程序，从 Ch16DocView\StudentForm2 改造
+
+在 CWinApp::InitInstance 中：
+CWinApp::ProcessShellCommand 内部调用 CWinApp::OnFileNew
+EnableShellOpen、RegisterShellFileTypes 激活从 Explorer 打开注册的文档类型

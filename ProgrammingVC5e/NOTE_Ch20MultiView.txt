@@ -1,0 +1,47 @@
+Ch20. 拆分窗口与多重视图
+
+--------------------
+PoemSplit
+
+使用 Ch19Print\PrintPoem 的 Doc 和 View 类
+动态拆分窗口 SDI 程序
+拆分窗口不是独立的：
+水平拆分的两个（上下），共享水平滚动条
+垂直拆分的两个（左右），共享垂直滚动条
+
+CWinApp::InitInstance 中通过 CSingleDocTemplate 绑定 Doc、Frame、View
+CMainFrame::OnCreateClient 的参数 CCreateContext 中包含 CSingleDocTemplate，因此知道 View
+
+--------------------
+PoemSplit2
+
+将 PoemSplit 改造为静态拆分窗口
+两个拆分窗格分别绑定两个 View：CStringView、CHexView
+静态拆分窗格可以改变大小，但不能改变 View 配置
+
+CWinApp::InitInstance 中虽然 CSingleDocTemplate 绑定 Doc、Frame、View
+但 CMainFrame::OnCreateClient 不通过 CSingleDocTemplate 知道 View，因为此时要绑定多个 View，而 CSingleDocTemplate 只能指定一个 View
+这时通过 CSplitterWnd::CreateView 绑定多个 View
+
+--------------------
+PoemSwitch
+
+SDI 程序用菜单切换两个 View：CStringView、CHexView
+使用 PoemSplit2 的 Doc、View 类
+
+注意：P483 的 SwitchToView 方法中用 SetDlgCtrlID 和 GetDlgItem 存取 CView 对象，这样就可以只创建一次 CView (new)
+
+--------------------
+PoemMulti
+
+MDI 程序多 View
+使用 PoemSplit2 的 Doc、View 类
+
+这回改造的重点在 CWinApp 类
+在 CWinApp::InitInstance 中创建第二个 CMultiDocTemplate
+
+New String Window 菜单映射到框架生成的 OnWindowNew 中，即和原有的 New Window 菜单的行为相同
+New Hex Window 菜单映射到自定义的 OnWindowNewHexWindow 中，在其中操作第二个 CMultiDocTemplate
+
+在 afxres.h 中有一系列 AFX_IDP_XXX 预定义 ID (General error/prompt strings)，可用于 AfxMessageBox 的消息字符串 ID
+

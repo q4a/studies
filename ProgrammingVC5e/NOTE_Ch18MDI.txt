@@ -1,0 +1,12 @@
+Ch18. 读写文档：MDI 应用程序
+
+--------------------
+StudentInfo
+读写 Student 列表数据的 MDI 程序，从 Ch17SDI\StudentInfo 改造
+
+在 CWinApp::InitInstance 中：
+通过改变命令行参数传过来的 shell command，在 ProcessShellCommand 前改变打开时新建文档 (CCommandLineInfo::FileNew) 为不新建文档而用空框架 (CCommandLineInfo::FileNothing)
+
+CMainFrame 和 CChildFrame 基本和框架自动生成的一样
+
+书 P438 有个多文档模板，但例子用没用
