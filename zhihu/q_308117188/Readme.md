@@ -7,6 +7,6 @@
 
 programming_languages_classification.xmind
 
-注：该思维导图用 2020 年后的新版 XMind 绘制，而使用经典版 XMind 8 无法正确打开。
+注：该思维导图用 2020 年后的新版 XMind 绘制，使用经典版 XMind 8 无法正确打开。
 
 ![](programming_languages_classification.png)
