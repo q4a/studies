@@ -1,7 +1,7 @@
-ï»¿; TestLoop.asm
+; TestLoop.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
@@ -27,15 +27,15 @@ dispmax proc
 dispmax endp
 
 start:
-    ; å¯»æ‰¾æ•°ç»„ä¸­çš„æœ€å¤§å€¼
+    ; Ñ°ÕÒÊı×éÖĞµÄ×î´óÖµ
     mov eax, offset MSG_TEST_ARRMAX
     call dispmsg
 
-    ; æ–¹æ³• 1. ä½¿ç”¨ ecx å‡é‡è®¡æ•° + loop å¾ªç¯æŒ‡ä»¤
+    ; ·½·¨ 1. Ê¹ÓÃ ecx ¼õÁ¿¼ÆÊı + loop Ñ­»·Ö¸Áî
 
     mov ecx, ARR_LEN - 1
     xor esi, esi
-    mov eax, array[esi * type array]    ; åˆå§‹æ—¶, å‡å®šç¬¬ä¸€ä¸ªæ•°æ˜¯æœ€å¤§å€¼
+    mov eax, array[esi * type array]    ; ³õÊ¼Ê±, ¼Ù¶¨µÚÒ»¸öÊıÊÇ×î´óÖµ
 LD1:
     inc esi
     cmp eax, array[esi * type array]
@@ -47,7 +47,7 @@ LD2:
     call dispmax
     call dispcrlf
 
-    ; æ–¹æ³• 2. ä½¿ç”¨ esi å¢é‡è®¡æ•° + jcc è·³è½¬æŒ‡ä»¤
+    ; ·½·¨ 2. Ê¹ÓÃ esi ÔöÁ¿¼ÆÊı + jcc Ìø×ªÖ¸Áî
 
     xor esi, esi
     mov eax, array[esi * type array]
@@ -63,7 +63,7 @@ LI2:
     call dispmax
     call dispcrlf
 
-    ; ç¨‹åºç»“æŸæç¤º
+    ; ³ÌĞò½áÊøÌáÊ¾
     mov eax, offset MSG_EXIT_PROMPT
     call dispmsg
     call readc

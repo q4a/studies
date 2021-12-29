@@ -1,7 +1,7 @@
-ï»¿; TestBranch.asm
+; TestBranch.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
@@ -11,7 +11,7 @@ include io32.inc
     MSG_RES byte 'Res: ', 0
     MSG_OF  byte 'Error: Overflow', 0
 
-    ; 32bit æœ‰ç¬¦å·æ•´æ•°å–å€¼èŒƒå›´ [â€“2147483648, 2147483647]
+    ; 32bit ÓĞ·ûºÅÕûÊıÈ¡Öµ·¶Î§ [¨C2147483648, 2147483647]
     dvar1 dword 2147483600
     dvar2 dword -48
 
@@ -20,12 +20,12 @@ start:
     mov eax, offset MSG_TEST_OF
     call dispmsg
 
-    ; ä½¿ç”¨åŒåˆ†æ”¯ç»“æ„,  åˆ¤æ–­æœ‰ç¬¦å·æ•°è¿ç®—æ˜¯å¦æº¢å‡º
+    ; Ê¹ÓÃË«·ÖÖ§½á¹¹,  ÅĞ¶ÏÓĞ·ûºÅÊıÔËËãÊÇ·ñÒç³ö
     mov eax, dvar1
     sub eax, dvar2
     jo ERR_OF
 
-    ; æ— æº¢å‡ºæ—¶
+    ; ÎŞÒç³öÊ±
     mov ebx, eax
     mov eax, offset MSG_RES
     call dispmsg
@@ -33,13 +33,13 @@ start:
     call dispsid
     jmp CALC_END
 ERR_OF:
-    ; æº¢å‡ºæ—¶
+    ; Òç³öÊ±
     mov eax, offset MSG_OF
     call dispmsg
 CALC_END:
     call dispcrlf
 
-    ; ç¨‹åºç»“æŸæç¤º
+    ; ³ÌĞò½áÊøÌáÊ¾
     mov eax, offset MSG_EXIT_PROMPT
     call dispmsg
     call readc

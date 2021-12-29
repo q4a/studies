@@ -1,7 +1,7 @@
-ï»¿; TestALU.asm
+; TestALU.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
@@ -39,7 +39,7 @@ start:
     call dispbd
     call dispcrlf
 
-    ; æµ‹è¯• xor æŒ‡ä»¤
+    ; ²âÊÔ xor Ö¸Áî
     mov eax, offset MSG_TEST_XOR
     call dispmsg
     mov eax, offset MSG_XOR
@@ -49,7 +49,7 @@ start:
     call dispbd
     call dispcrlf
 
-    ; æµ‹è¯• xor ç­‰ä»·æŒ‡ä»¤åºåˆ— A ^ B = ~A & B | A & ~B
+    ; ²âÊÔ xor µÈ¼ÛÖ¸ÁîĞòÁĞ A ^ B = ~A & B | A & ~B
     mov eax, offset MSG_XOR_EQU
     call dispmsg
 
@@ -64,11 +64,11 @@ start:
     call dispbd
     call dispcrlf
 
-    ; æµ‹è¯•å¤§å°å†™å­—æ¯è½¬æ¢
+    ; ²âÊÔ´óĞ¡Ğ´×ÖÄ¸×ª»»
     mov eax, offset MSG_TEST_CASECONVERT
     call dispmsg
 
-    ; å¤§å†™å­—æ¯è½¬æ¢ä¸ºå°å†™, ä½¿ç”¨ or
+    ; ´óĞ´×ÖÄ¸×ª»»ÎªĞ¡Ğ´, Ê¹ÓÃ or
     mov eax, offset MSG_I_UPPER
     call dispmsg
     call readc
@@ -81,7 +81,7 @@ start:
     call dispc
     call dispcrlf
 
-    ; å°å†™å­—æ¯è½¬æ¢ä¸ºå¤§å†™, ä½¿ç”¨ and
+    ; Ğ¡Ğ´×ÖÄ¸×ª»»Îª´óĞ´, Ê¹ÓÃ and
     mov eax, offset MSG_I_LOWER
     call dispmsg
     call readc
@@ -93,7 +93,7 @@ start:
     and al, 0DFh
     call dispc
 
-    ; ç¨‹åºç»“æŸæç¤º
+    ; ³ÌĞò½áÊøÌáÊ¾
     call dispcrlf
     mov eax, offset MSG_EXIT_PROMPT
     call dispmsg

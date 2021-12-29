@@ -1,7 +1,7 @@
-ï»¿; TestAddr.asm
+; TestAddr.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
@@ -10,26 +10,26 @@ include io32.inc
     org     $+10
     array   word    1, 2, 3, 4, 5, 6, 7, 8, 9, 10
     wvar    word    5678h
-    ARR_SIZE    = $-array                   ; å†…å®¹ä» 5678h åˆ° 1 çš„å­—èŠ‚æ•° 16H (22D)
-    ARR_LEN     = ARR_SIZE / sizeof word    ; æ•°æ®ç±»å‹ (word) çš„å—æ•° 0BH (11D)
-    TYPE_WORD   = type word                 ; sizeof word, type word, type array çš„ç»“æœç›¸åŒ, éƒ½è¿”å›ç±»å‹çš„ size
+    ARR_SIZE    = $-array                   ; ÄÚÈİ´Ó 5678h µ½ 1 µÄ×Ö½ÚÊı 16H (22D)
+    ARR_LEN     = ARR_SIZE / sizeof word    ; Êı¾İÀàĞÍ (word) µÄ¿éÊı 0BH (11D)
+    TYPE_WORD   = type word                 ; sizeof word, type word, type array µÄ½á¹ûÏàÍ¬, ¶¼·µ»ØÀàĞÍµÄ size
     TYPE_ARR    = type array
-    LENOF_ARR   = lengthof array            ; å¾—åˆ°ç±»å‹ (word) å˜é‡çš„å—æ•° 0AH (10D), æ³¨æ„ä¸ä¼šè®¡ç®— array åçš„ wvar éƒ¨åˆ†
-    SZOF_ARR    = sizeof array              ; å¾—åˆ°å˜é‡çš„å­—èŠ‚æ•° 14H (20D), æ³¨æ„ä¸ä¼šè®¡ç®— array åçš„ wvar éƒ¨åˆ†
+    LENOF_ARR   = lengthof array            ; µÃµ½ÀàĞÍ (word) ±äÁ¿µÄ¿éÊı 0AH (10D), ×¢Òâ²»»á¼ÆËã array ºóµÄ wvar ²¿·Ö
+    SZOF_ARR    = sizeof array              ; µÃµ½±äÁ¿µÄ×Ö½ÚÊı 14H (20D), ×¢Òâ²»»á¼ÆËã array ºóµÄ wvar ²¿·Ö
     dvar    dword 9abcdef0h
 
 .code
 start:
-    ; è¿™é‡Œåªæ“ä½œ eax, ebx çš„ä½ 16bit, æ‰€ä»¥ç”¨ disprd æ‰“å°å‡ºçš„ eax, ebx çš„é«˜ 16bit æ˜¯éšæ—¶å˜åŒ–çš„è„å€¼
-    mov al, [bvar]          ; æŒ‡ä»¤é•¿=5B, è¿™é‡Œ bvar å’Œ [bvar]
-    mov ah, [bvar + 1]      ; æŒ‡ä»¤é•¿=6B, ä»¥åŠ bvar + 1 å’Œ [bvar + 1] æ„ä¹‰ç›¸åŒ, éƒ½è¡¨ç¤ºå˜é‡çš„å†…å®¹
-    mov bx, wvar[2]         ; æŒ‡ä»¤é•¿=7B, ä¸ C/C++ ä¸åŒ, è¿™é‡Œçš„åç§»å§‹ç»ˆæ˜¯å­—èŠ‚æ•°, è€Œéæ•°æ®ç±»å‹çš„å—æ•°
-    mov ecx, ARR_LEN        ; æŒ‡ä»¤é•¿=5B
-    mov edx, $              ; å½“å‰æŒ‡ä»¤åç§» $=17H (23D) + .code æ®µåœ¨è¿›ç¨‹ç©ºé—´ä¸­çš„åŠ è½½ä½ç½® (é€šå¸¸æ˜¯ 00401000H)
-    mov esi, offset dvar    ; esi <= dvar çš„åç§» (22H) + .data æ®µåœ¨è¿›ç¨‹ç©ºé—´ä¸­çš„åŠ è½½ä½ç½® (é€šå¸¸æ˜¯ 00405000H)
+    ; ÕâÀïÖ»²Ù×÷ eax, ebx µÄµÍ 16bit, ËùÒÔÓÃ disprd ´òÓ¡³öµÄ eax, ebx µÄ¸ß 16bit ÊÇËæÊ±±ä»¯µÄÔàÖµ
+    mov al, [bvar]          ; Ö¸Áî³¤=5B, ÕâÀï bvar ºÍ [bvar]
+    mov ah, [bvar + 1]      ; Ö¸Áî³¤=6B, ÒÔ¼° bvar + 1 ºÍ [bvar + 1] ÒâÒåÏàÍ¬, ¶¼±íÊ¾±äÁ¿µÄÄÚÈİ
+    mov bx, wvar[2]         ; Ö¸Áî³¤=7B, Óë C/C++ ²»Í¬, ÕâÀïµÄÆ«ÒÆÊ¼ÖÕÊÇ×Ö½ÚÊı, ¶ø·ÇÊı¾İÀàĞÍµÄ¿éÊı
+    mov ecx, ARR_LEN        ; Ö¸Áî³¤=5B
+    mov edx, $              ; µ±Ç°Ö¸ÁîÆ«ÒÆ $=17H (23D) + .code ¶ÎÔÚ½ø³Ì¿Õ¼äÖĞµÄ¼ÓÔØÎ»ÖÃ (Í¨³£ÊÇ 00401000H)
+    mov esi, offset dvar    ; esi <= dvar µÄÆ«ÒÆ (22H) + .data ¶ÎÔÚ½ø³Ì¿Õ¼äÖĞµÄ¼ÓÔØÎ»ÖÃ (Í¨³£ÊÇ 00405000H)
     mov edi, [esi]
     mov ebp, [dvar]
-    ; mov esp, dword ptr array    ; ä¸€èˆ¬ä¸è¦ç›´æ¥æ›´æ”¹ esp, ä¼šå¼•èµ·åç»­ call æŒ‡ä»¤æ— æ³•æ­£å¸¸å·¥ä½œ
+    ; mov esp, dword ptr array    ; Ò»°ã²»ÒªÖ±½Ó¸ü¸Ä esp, »áÒıÆğºóĞø call Ö¸ÁîÎŞ·¨Õı³£¹¤×÷
     mov eax, dword ptr array
 
     call disprd

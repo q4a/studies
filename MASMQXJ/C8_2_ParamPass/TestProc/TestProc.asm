@@ -1,7 +1,7 @@
-ï»¿; TestProc.asm
+; TestProc.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
@@ -22,30 +22,30 @@ include io32.inc
 
 .code
 
-; [in] al   å°† al çš„ä½ 4bit è½¬æ¢ä¸ºè¡¨ç¤ºå®ƒçš„åå…­è¿›åˆ¶ ASCII ç  (0~F)
+; [in] al   ½« al µÄµÍ 4bit ×ª»»Îª±íÊ¾ËüµÄÊ®Áù½øÖÆ ASCII Âë (0~F)
 htoasc proc
-    and al, 0Fh     ; æå–ä½ 4bit
-    or al, 30h      ; å°†æ•°å€¼ 0~9 è½¬æ¢ä¸º ASCII ç 
-    cmp al, 39h     ; å¦‚æœè¶…å‡ºäº† 0~9, è¯´æ˜åŸæ•°å€¼æ˜¯ A~F, è¿˜éœ€åŠ  7
+    and al, 0Fh     ; ÎöÈ¡µÍ 4bit
+    or al, 30h      ; ½«ÊıÖµ 0~9 ×ª»»Îª ASCII Âë
+    cmp al, 39h     ; Èç¹û³¬³öÁË 0~9, ËµÃ÷Ô­ÊıÖµÊÇ A~F, »¹Ğè¼Ó 7
     jbe @F
     add al, 7
 @@:
     ret
 htoasc endp
 
-; htoasc çš„æŸ¥è¡¨å®ç°æ–¹æ³•
+; htoasc µÄ²é±íÊµÏÖ·½·¨
 htoasc2 proc
-    and eax, 0Fh                ; æå–ä½ 4bit
+    and eax, 0Fh                ; ÎöÈ¡µÍ 4bit
     mov al, ASCII[eax]
     ret
 
-; è¯¥æ•°æ®äº§ç”Ÿåœ¨ .code ä»£ç æ®µ (åªè¯»), æ˜¯è¿‡ç¨‹ä½“çš„ä¸€éƒ¨åˆ†
-; å› æ­¤å°†å…¶æ”¾åœ¨ ret æŒ‡ä»¤ä¹‹å, ä»¥é˜²æ­¢å°†å…¶ä½œä¸ºæŒ‡ä»¤æ‰§è¡Œ
+; ¸ÃÊı¾İ²úÉúÔÚ .code ´úÂë¶Î (Ö»¶Á), ÊÇ¹ı³ÌÌåµÄÒ»²¿·Ö
+; Òò´Ë½«Æä·ÅÔÚ ret Ö¸ÁîÖ®ºó, ÒÔ·ÀÖ¹½«Æä×÷ÎªÖ¸ÁîÖ´ĞĞ
 ASCII   byte '0123456789ABCDEF'
 htoasc2 endp
 
-; æµ‹è¯•: é€šè¿‡å¯„å­˜å™¨ä¼ é€’å‚æ•°
-; [in] procHtoasc       æŒ‡å‘ htoasc è¿‡ç¨‹çš„æŒ‡é’ˆ
+; ²âÊÔ: Í¨¹ı¼Ä´æÆ÷´«µİ²ÎÊı
+; [in] procHtoasc       Ö¸Ïò htoasc ¹ı³ÌµÄÖ¸Õë
 testHextoAsc proc procHtoasc:dword
     push ebx
     push esi
@@ -53,11 +53,11 @@ testHextoAsc proc procHtoasc:dword
     mov eax, [Data]
     xor esi, esi
 @@:
-    rol eax, 4      ; é«˜ 4bit å¾ªç¯ç§»ä½è¿›å…¥ä½ 4bit
-    mov ebx, eax    ; ä¿å­˜ eax
+    rol eax, 4      ; ¸ß 4bit Ñ­»·ÒÆÎ»½øÈëµÍ 4bit
+    mov ebx, eax    ; ±£´æ eax
     call procHtoasc
     mov Asc[esi], al
-    mov eax, ebx    ; è¿˜åŸ eax
+    mov eax, ebx    ; »¹Ô­ eax
     inc esi
     cmp esi, 8
     jnz @B
@@ -70,7 +70,7 @@ testHextoAsc proc procHtoasc:dword
     ret 4
 testHextoAsc endp
 
-; ä»æ§åˆ¶å°è¾“å…¥ 32bit äºŒè¿›åˆ¶æ•°
+; ´Ó¿ØÖÆÌ¨ÊäÈë 32bit ¶ş½øÖÆÊı
 rdbd proc
 L1:
     xor edx, edx
@@ -82,9 +82,9 @@ L1:
     cmp al, '1'
     ja ERR
 
-    and al, 0Fh     ; å°† ASCII ç  0, 1 è½¬æ¢ä¸ºæ•°å€¼
-    shl edx, 1      ; åˆå¹¶ä¹‹å‰è¾“å…¥çš„ç»“æœ
-    or dl, al       ; åªç”¨åˆå¹¶ä½ 8bit
+    and al, 0Fh     ; ½« ASCII Âë 0, 1 ×ª»»ÎªÊıÖµ
+    shl edx, 1      ; ºÏ²¢Ö®Ç°ÊäÈëµÄ½á¹û
+    or dl, al       ; Ö»ÓÃºÏ²¢µÍ 8bit
     loop @B
 
     mov [Temp], edx
@@ -100,7 +100,7 @@ ERR:
 ERRMSG  byte 0Dh, 0Ah, 'Input error, enter again.', 0Dh, 0Ah, 0
 rdbd endp
 
-; æµ‹è¯•: é€šè¿‡å…¨å±€å…±äº«å˜é‡ä¼ é€’å‚æ•°
+; ²âÊÔ: Í¨¹ıÈ«¾Ö¹²Ïí±äÁ¿´«µİ²ÎÊı
 testGlobal proc
     push ebp
     mov ebp, esp
@@ -112,22 +112,22 @@ testGlobal proc
 @@:
     mov eax, offset MSG_INPUT_BIN
     call dispmsg
-    mov ebx, ecx    ; ä¿å­˜ ecx
+    mov ebx, ecx    ; ±£´æ ecx
     call rdbd
     mov eax, [Temp]
     mov [esi], eax
-    mov ecx, ebx    ; è¿˜åŸ ecx
+    mov ecx, ebx    ; »¹Ô­ ecx
     add esi, type Array
     loop @B
 
     mov ecx, COUNT
     mov esi, offset Array
 @@:
-    mov ebx, ecx    ; ä¿å­˜ ecx
+    mov ebx, ecx    ; ±£´æ ecx
     mov eax, [esi]
     call dispbd
     call dispcrlf
-    mov ecx, ebx    ; è¿˜åŸ ecx
+    mov ecx, ebx    ; »¹Ô­ ecx
     add esi, type Array
     loop @B
 
@@ -137,9 +137,9 @@ testGlobal proc
     ret
 testGlobal endp
 
-; æ±‚ DWORD æ•´æ•°æ•°ç»„ arr ä¸­æ‰€æœ‰å…ƒç´ çš„å¹³å‡å€¼
-; å½“ proc åæœ‰å‚æ•°åˆ—è¡¨æ—¶, è‡ªåŠ¨äº§ç”Ÿ prolog (push ebp; mov ebp, esp) å’Œ epilog (leave)
-; ä»¥åŠå°†ä¸å¸¦å‚æ•°çš„ ret æŒ‡ä»¤è‡ªåŠ¨è½¬æ¢ä¸ºå¸¦å‚æ•°çš„ ret n æŒ‡ä»¤
+; Çó DWORD ÕûÊıÊı×é arr ÖĞËùÓĞÔªËØµÄÆ½¾ùÖµ
+; µ± proc ºóÓĞ²ÎÊıÁĞ±íÊ±, ×Ô¶¯²úÉú prolog (push ebp; mov ebp, esp) ºÍ epilog (leave)
+; ÒÔ¼°½«²»´ø²ÎÊıµÄ ret Ö¸Áî×Ô¶¯×ª»»Îª´ø²ÎÊıµÄ ret n Ö¸Áî
 mean proc arr:dword, len:dword
     push ebx
     push esi
@@ -153,36 +153,36 @@ mean proc arr:dword, len:dword
     add eax, [ebx + esi * type dword]
     inc esi
     cmp esi, ecx
-    jb @B           ; è¿™é‡Œä¸ç”¨ loop æŒ‡ä»¤, å› ä¸º loop ä¼šè‡ªå‡ ecx, è€Œä¸‹é¢è¦ç”¨åˆ° ecx
+    jb @B           ; ÕâÀï²»ÓÃ loop Ö¸Áî, ÒòÎª loop »á×Ô¼õ ecx, ¶øÏÂÃæÒªÓÃµ½ ecx
 
-    ; å°† eax ç¬¦å·æ‰©å±•åˆ° edx:eax
-    ; ç­‰ä»·äº mov edx, eax; sar edx, 31
+    ; ½« eax ·ûºÅÀ©Õ¹µ½ edx:eax
+    ; µÈ¼ÛÓÚ mov edx, eax; sar edx, 31
     cdq
     idiv ecx
 GO:
     pop esi
     pop ebx
-    ret             ; è¿™é‡Œå†™ ret 8 å’Œ ret éƒ½å¯ä»¥, MASM å°†åè€…è‡ªåŠ¨è½¬æ¢ä¸ºå‰è€…
+    ret             ; ÕâÀïĞ´ ret 8 ºÍ ret ¶¼¿ÉÒÔ, MASM ½«ºóÕß×Ô¶¯×ª»»ÎªÇ°Õß
 mean endp
 
-; æµ‹è¯•: é€šè¿‡å †æ ˆä¼ é€’å‚æ•°
+; ²âÊÔ: Í¨¹ı¶ÑÕ»´«µİ²ÎÊı
 testMean proc
     push ebp
     mov ebp, esp
     push ebx
 
-    ; æ‰“å°è°ƒç”¨å‰çš„ esp
+    ; ´òÓ¡µ÷ÓÃÇ°µÄ esp
     ; mov eax, esp
     ; call disphd
     ; call dispcrlf
 
-    ; ä»¥ä¸‹ invoke ç­‰ä»·äºè¿™ä¸‰æ¡æŒ‡ä»¤
+    ; ÒÔÏÂ invoke µÈ¼ÛÓÚÕâÈıÌõÖ¸Áî
     ; push lengthof Array2
     ; push offset Array2
     ; call mean
     invoke mean, offset Array2, lengthof Array2
 
-    ; æ‰“å°è°ƒç”¨åçš„ esp, éªŒè¯å †æ ˆæ˜¯å¦å·²è¢«æ¸…ç†
+    ; ´òÓ¡µ÷ÓÃºóµÄ esp, ÑéÖ¤¶ÑÕ»ÊÇ·ñÒÑ±»ÇåÀí
     ; mov ebx, eax
     ; mov eax, esp
     ; call disphd
@@ -196,7 +196,7 @@ testMean proc
     ret
 testMean endp
 
-; ç¨‹åºå…¥å£
+; ³ÌĞòÈë¿Ú
 start:
     mov eax, offset MSG_TEST_BANNER
     call dispmsg
@@ -210,7 +210,7 @@ start:
     call testMean
 
     call dispcrlf
-    ; ç¨‹åºç»“æŸæç¤º
+    ; ³ÌĞò½áÊøÌáÊ¾
     mov eax, offset MSG_EXIT_PROMPT
     call dispmsg
     call readc

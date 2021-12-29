@@ -1,7 +1,7 @@
-ï»¿; TestALU.asm
+; TestALU.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
@@ -17,8 +17,8 @@ start:
     mov eax, offset MSG_TEST_BITSHIFT
     call dispmsg
 
-    ; 16bit æ•°æ®çš„ä¹˜ç§¯ä¸º 32bit
-    ; è®¡ç®— 10x, ä½¿ç”¨ 10x = 2x + 8x å®ç°
+    ; 16bit Êı¾İµÄ³Ë»ıÎª 32bit
+    ; ¼ÆËã 10x, Ê¹ÓÃ 10x = 2x + 8x ÊµÏÖ
     xor eax, eax
     mov ax, wvar
 
@@ -29,31 +29,31 @@ start:
     call dispuid
     call dispcrlf
 
-    ; è®¡ç®— 10x, ä½¿ç”¨ mul æŒ‡ä»¤
-    ; æŒ‡ä»¤ mul src, åªæœ‰ä¸€ä¸ªæºæ“ä½œæ•°
-    ; å¦ä¸€ä¸ªæ“ä½œæ•°éšå«ä¸º al, ax, eax
-    ; ç»“æœæ“ä½œæ•°éšå«ä¸º ax, dx:ax, edx:eax
+    ; ¼ÆËã 10x, Ê¹ÓÃ mul Ö¸Áî
+    ; Ö¸Áî mul src, Ö»ÓĞÒ»¸öÔ´²Ù×÷Êı
+    ; ÁíÒ»¸ö²Ù×÷ÊıÒşº¬Îª al, ax, eax
+    ; ½á¹û²Ù×÷ÊıÒşº¬Îª ax, dx:ax, edx:eax
 
-    ; å¦‚æœåš 16bit ä¹˜æ³•
+    ; Èç¹û×ö 16bit ³Ë·¨
     ; wvar = 34000d = 84D0h
-    ; wvar x 10 = 340000d = 53020h å…¶ä¸­ ax ä¿å­˜ 3020h, dx ä¿å­˜ 5h
+    ; wvar x 10 = 340000d = 53020h ÆäÖĞ ax ±£´æ 3020h, dx ±£´æ 5h
 
-    ; è¿™é‡Œåš 32bit ä¹˜æ³•
-    ; å°† 16bit æ•°æ®è¿›è¡Œé›¶ä½æ‰©å±•ä¸º 32bit
+    ; ÕâÀï×ö 32bit ³Ë·¨
+    ; ½« 16bit Êı¾İ½øĞĞÁãÎ»À©Õ¹Îª 32bit
     movzx ebx, wvar
     mov eax, 10
     mul ebx     ; r = 10x
     call dispuid
     call dispcrlf
 
-    ; 64bit æ•°æ®é€»è¾‘å³ç§»
+    ; 64bit Êı¾İÂß¼­ÓÒÒÆ
     shr dword ptr qvar+4, 1
     rcr dword ptr qvar, 1
-    ; 64bit æ•°æ®ç®—æœ¯å³ç§»
+    ; 64bit Êı¾İËãÊõÓÒÒÆ
     sar dword ptr qvar+4, 1
     rcr dword ptr qvar, 1
-    ; 64bit æ•°æ®é€»è¾‘/ç®—æœ¯å·¦ç§»
-    shl dword ptr qvar, 1       ; sal å’Œ shl ç›¸åŒ
+    ; 64bit Êı¾İÂß¼­/ËãÊõ×óÒÆ
+    shl dword ptr qvar, 1       ; sal ºÍ shl ÏàÍ¬
     rcl dword ptr qvar+4, 1
 
     mov eax, dword ptr qvar+4
@@ -64,7 +64,7 @@ start:
     call disphd
     call dispcrlf
 
-    ; ç¨‹åºç»“æŸæç¤º
+    ; ³ÌĞò½áÊøÌáÊ¾
     mov eax, offset MSG_EXIT_PROMPT
     call dispmsg
     call readc

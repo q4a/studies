@@ -1,7 +1,7 @@
-ï»¿; TestAddr.asm
+; TestAddr.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 

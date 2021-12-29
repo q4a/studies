@@ -1,7 +1,7 @@
-ï»¿; TestSum.asm
+; TestSum.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
@@ -10,25 +10,25 @@ include io32.inc
     MSG_TEST_SUM        byte '----- test sum -----', 0Dh, 0Ah, 0
 
     num dword 100000
-    sum qword ?     ;  æ±‚å’Œç»“æœå ç”¨ 64bit
+    sum qword ?     ;  ÇóºÍ½á¹ûÕ¼ÓÃ 64bit
 
 .code
 start:
     mov eax, offset MSG_TEST_SUM
     call dispmsg
 
-    ; ç”¨ç­‰å·®æ•°åˆ—æ±‚å’Œå…¬å¼æ±‚ 1 + 2 + 3 + ... + N = (N + 1) * N / 2
+    ; ÓÃµÈ²îÊıÁĞÇóºÍ¹«Ê½Çó 1 + 2 + 3 + ... + N = (N + 1) * N / 2
     mov eax, num
     add eax, 1
-    mul num     ; 32bit ä¹˜ç§¯ä¸º 64bit, ç»“æœä¿å­˜åœ¨ edx:eax
+    mul num     ; 32bit ³Ë»ıÎª 64bit, ½á¹û±£´æÔÚ edx:eax
 
-    ; edx:eax 64bit æ•´ä½“é€»è¾‘å³ç§»å®ç°é™¤ä»¥ 2
-    ; è¿™é‡Œä¸ç”¨è€ƒè™‘æœ€ä½æœ‰æ•ˆä½ä¸º 1 æ—¶, å³ç§»é€ æˆæœ‰æ•ˆæ•°å­—ä¸¢å¤±, è€Œéœ€è¦ä¿®æ­£çš„é—®é¢˜
-    ; å› ä¸º (N + 1) * N ä¸€å®šæ˜¯å¶æ•°, æœ€ä½æœ‰æ•ˆä½æ˜¯ 0
+    ; edx:eax 64bit ÕûÌåÂß¼­ÓÒÒÆÊµÏÖ³ıÒÔ 2
+    ; ÕâÀï²»ÓÃ¿¼ÂÇ×îµÍÓĞĞ§Î»Îª 1 Ê±, ÓÒÒÆÔì³ÉÓĞĞ§Êı×Ö¶ªÊ§, ¶øĞèÒªĞŞÕıµÄÎÊÌâ
+    ; ÒòÎª (N + 1) * N Ò»¶¨ÊÇÅ¼Êı, ×îµÍÓĞĞ§Î»ÊÇ 0
     shr edx, 1
     rcr eax, 1
 
-    ; edx:eax ä¿å­˜åˆ°å˜é‡ sum
+    ; edx:eax ±£´æµ½±äÁ¿ sum
     mov dword ptr sum, eax
     mov dword ptr sum+4, edx
 
@@ -40,7 +40,7 @@ start:
     call disphd
     call dispcrlf
 
-    ; ç¨‹åºç»“æŸæç¤º
+    ; ³ÌĞò½áÊøÌáÊ¾
     mov eax, offset MSG_EXIT_PROMPT
     call dispmsg
     call readc

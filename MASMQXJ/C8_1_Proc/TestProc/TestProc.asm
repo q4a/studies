@@ -1,7 +1,7 @@
-ï»¿; TestProc.asm
+; TestProc.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
@@ -14,19 +14,19 @@ include io32.inc
 modRetAddr proc
     push ebp
     mov ebp, esp
-    mov eax, offset L2  ; L2 æ˜¯ä¸»è¿‡ç¨‹ä¸­çš„æ ‡å·
-    mov [ebp + 4], eax  ; ä¿®æ”¹ [è¿”å›åœ°å€]
+    mov eax, offset L2  ; L2 ÊÇÖ÷¹ı³ÌÖĞµÄ±êºÅ
+    mov [ebp + 4], eax  ; ĞŞ¸Ä [·µ»ØµØÖ·]
     leave
     ret
 modRetAddr endp
 
 mydispcrlf proc
-    ; æ ¹æ®è°ƒç”¨çº¦å®šå’Œéœ€è¦, ä¿æŠ¤ç›¸åº”çš„å¯„å­˜å™¨æ—§å€¼
-    ; å¯¹äº MSVC x86 (32bit) __cdecl (C è¯­è¨€) å’Œ __stdcall è°ƒç”¨çº¦å®š:
-    ; EAX, ECX, EDX æ˜¯ caller-saved å¯„å­˜å™¨
-    ; EBX, ESI, EDI æ˜¯ callee-saved å¯„å­˜å™¨
+    ; ¸ù¾İµ÷ÓÃÔ¼¶¨ºÍĞèÒª, ±£»¤ÏàÓ¦µÄ¼Ä´æÆ÷¾ÉÖµ
+    ; ¶ÔÓÚ MSVC x86 (32bit) __cdecl (C ÓïÑÔ) ºÍ __stdcall µ÷ÓÃÔ¼¶¨:
+    ; EAX, ECX, EDX ÊÇ caller-saved ¼Ä´æÆ÷
+    ; EBX, ESI, EDI ÊÇ callee-saved ¼Ä´æÆ÷
 
-    ; è¯¥è¿‡ç¨‹æ²¡æœ‰ä¼ å…¥å‚æ•° å’Œ å±€éƒ¨å˜é‡, æ‰€ä»¥æ²¡æœ‰ä½¿ç”¨ prolog/epilog äº§ç”Ÿæ ˆå¸§ (stack frame)
+    ; ¸Ã¹ı³ÌÃ»ÓĞ´«Èë²ÎÊı ºÍ ¾Ö²¿±äÁ¿, ËùÒÔÃ»ÓĞÊ¹ÓÃ prolog/epilog ²úÉúÕ»Ö¡ (stack frame)
     mov al, 0Dh
     call dispc
     mov al, 0Ah
@@ -34,24 +34,24 @@ mydispcrlf proc
     ret
 mydispcrlf endp
 
-; ç¨‹åºå…¥å£
+; ³ÌĞòÈë¿Ú
 start:
     mov eax, offset MSG_TEST_BANNER
     call dispmsg
 
-    call Next   ; å°† [è¿”å›åœ°å€] Next å‹æ ˆ
-Next: pop eax   ; eax å¾—åˆ° pop eax æœ¬æ¡æŒ‡ä»¤çš„åœ°å€ Next
+    call Next   ; ½« [·µ»ØµØÖ·] Next Ñ¹Õ»
+Next: pop eax   ; eax µÃµ½ pop eax ±¾ÌõÖ¸ÁîµÄµØÖ· Next
     call disphd
     call mydispcrlf
 
     call modRetAddr
-L1: mov eax, 1  ; modRetAddr ä¸­ä¿®æ”¹äº† [è¿”å›åœ°å€], æ‰€ä»¥ L1~L2 ä¹‹é—´çš„æŒ‡ä»¤ä¸ä¼šæ‰§è¡Œ
+L1: mov eax, 1  ; modRetAddr ÖĞĞŞ¸ÄÁË [·µ»ØµØÖ·], ËùÒÔ L1~L2 Ö®¼äµÄÖ¸Áî²»»áÖ´ĞĞ
     call dispuid
 L2: mov eax, 4
     call dispuid
     call dispcrlf
 
-    ; ç¨‹åºç»“æŸæç¤º
+    ; ³ÌĞò½áÊøÌáÊ¾
     mov eax, offset MSG_EXIT_PROMPT
     call dispmsg
     call readc

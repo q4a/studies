@@ -1,7 +1,7 @@
-ï»¿; TestExpr.asm
+; TestExpr.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
@@ -33,43 +33,43 @@ showesp macro
     pop eax
 endm
 
-; åœ¨æ§åˆ¶å°æç¤ºå˜é‡å, å¹¶ä»é”®ç›˜è¾“å…¥è·å¾—å…¶æ•´æ•°å€¼
-; [in] vn   å˜é‡åå­—ç¬¦ä¸²
-; [in] len  å˜é‡åå­—ç¬¦ä¸²çš„é•¿åº¦, ä¸åŒ…å«ç»“å°¾ 0
+; ÔÚ¿ØÖÆÌ¨ÌáÊ¾±äÁ¿Ãû, ²¢´Ó¼üÅÌÊäÈë»ñµÃÆäÕûÊıÖµ
+; [in] vn   ±äÁ¿Ãû×Ö·û´®
+; [in] len  ±äÁ¿Ãû×Ö·û´®µÄ³¤¶È, ²»°üº¬½áÎ² 0
 ;
-; å½“ proc åé¢æœ‰å‚æ•°åˆ—è¡¨ vn:dword, len:dword æ—¶, ä¼šè‡ªåŠ¨ç”Ÿæˆ prolog/epilog:
+; µ± proc ºóÃæÓĞ²ÎÊıÁĞ±í vn:dword, len:dword Ê±, »á×Ô¶¯Éú³É prolog/epilog:
 ; 1. prolog: push ebp, mov ebp, esp
-; 2. epilog: leave, ç­‰ä»·äº mov esp, ebp; pop ebp
-; 3. åœ¨ stdcall è°ƒç”¨çº¦å®šæ—¶, MASM å°†ä¸å¸¦å‚æ•°çš„ ret æŒ‡ä»¤è‡ªåŠ¨è½¬æ¢ä¸ºå¸¦å‚æ•°çš„ ret n æŒ‡ä»¤, n ä¸ºå‡½æ•°çš„å‚æ•°å­—èŠ‚æ•°
-; ç»æµ‹è¯•:
-; ä¸€æ—¦åˆ é™¤å‚æ•°åˆ—è¡¨, å³ä½¿è¿˜æœ‰ proto stdcall è°ƒç”¨çº¦å®šè¯´æ˜, ä¹Ÿä¸ä¼šè‡ªåŠ¨ç”Ÿæˆä»¥ä¸Š prolog/epilog, ä¸”ä¸ä¼šå°† ret è‡ªåŠ¨è½¬æ¢ä¸º ret n
+; 2. epilog: leave, µÈ¼ÛÓÚ mov esp, ebp; pop ebp
+; 3. ÔÚ stdcall µ÷ÓÃÔ¼¶¨Ê±, MASM ½«²»´ø²ÎÊıµÄ ret Ö¸Áî×Ô¶¯×ª»»Îª´ø²ÎÊıµÄ ret n Ö¸Áî, n Îªº¯ÊıµÄ²ÎÊı×Ö½ÚÊı
+; ¾­²âÊÔ:
+; Ò»µ©É¾³ı²ÎÊıÁĞ±í, ¼´Ê¹»¹ÓĞ proto stdcall µ÷ÓÃÔ¼¶¨ËµÃ÷, Ò²²»»á×Ô¶¯Éú³ÉÒÔÉÏ prolog/epilog, ÇÒ²»»á½« ret ×Ô¶¯×ª»»Îª ret n
 ;
-; æŸ¥çœ‹è¿™äº›æ ¹æ® [è°ƒç”¨çº¦å®šè¯´æ˜] å’Œ [å‚æ•°åˆ—è¡¨] è‡ªåŠ¨ç”Ÿæˆçš„ prolog/epilog:
-; .lst ä¸­å¹¶ä¸åŒ…å«è¿™äº›è‡ªåŠ¨ç”Ÿæˆçš„æŒ‡ä»¤, å¯ä»¥å¯¹ç›®æ ‡æ–‡ä»¶ç”¨ dumpbin /disasm file.obj åæ±‡ç¼–è½¬å‚¨æ‰“å°
-; ä¾‹å¦‚, è¯¥å‡½æ•°ä¼šäº§ç”Ÿå¦‚ä¸‹ prolog/epilog
-; _inputVar@8:                          ; ç”Ÿæˆç¬¦åˆ MSVC __stdcall è°ƒç”¨çº¦å®šçš„ä¿®é¥°å
-; 00000000: 55          push    ebp     ; å‰ä¸¤æ¡æ˜¯è‡ªåŠ¨ç”Ÿæˆçš„
+; ²é¿´ÕâĞ©¸ù¾İ [µ÷ÓÃÔ¼¶¨ËµÃ÷] ºÍ [²ÎÊıÁĞ±í] ×Ô¶¯Éú³ÉµÄ prolog/epilog:
+; .lst ÖĞ²¢²»°üº¬ÕâĞ©×Ô¶¯Éú³ÉµÄÖ¸Áî, ¿ÉÒÔ¶ÔÄ¿±êÎÄ¼şÓÃ dumpbin /disasm file.obj ·´»ã±à×ª´¢´òÓ¡
+; ÀıÈç, ¸Ãº¯Êı»á²úÉúÈçÏÂ prolog/epilog
+; _inputVar@8:                          ; Éú³É·ûºÏ MSVC __stdcall µ÷ÓÃÔ¼¶¨µÄĞŞÊÎÃû
+; 00000000: 55          push    ebp     ; Ç°Á½ÌõÊÇ×Ô¶¯Éú³ÉµÄ
 ; 00000001: 8B EC       mov     ebp,esp
-; 00000003: 56          push    esi     ; åä¸¤æ¡æ˜¯æ‰‹å·¥å†™çš„
+; 00000003: 56          push    esi     ; ºóÁ½ÌõÊÇÊÖ¹¤Ğ´µÄ
 ; 00000004: 57          push    edi
 ; ...
-; 0000003F: 5F          pop     edi     ; å‰ä¸¤æ¡æ˜¯æ‰‹å·¥å†™çš„
+; 0000003F: 5F          pop     edi     ; Ç°Á½ÌõÊÇÊÖ¹¤Ğ´µÄ
 ; 00000040: 5E          pop     esi
-; 00000041: C9          leave           ; åä¸¤æ¡æ˜¯è‡ªåŠ¨ç”Ÿæˆçš„
-; 00000042: C2 08 00    ret 8           ; è¿™é‡Œäº§ç”Ÿçš„æ˜¯å¸¦å‚æ•°çš„ ret n [opcode: C2], è€Œä¸æ˜¯ä¸å¸¦å‚æ•°çš„ ret [opcode: C3]
+; 00000041: C9          leave           ; ºóÁ½ÌõÊÇ×Ô¶¯Éú³ÉµÄ
+; 00000042: C2 08 00    ret 8           ; ÕâÀï²úÉúµÄÊÇ´ø²ÎÊıµÄ ret n [opcode: C2], ¶ø²»ÊÇ²»´ø²ÎÊıµÄ ret [opcode: C3]
 inputVar proto stdcall :dword, :dword
 inputVar proc vn:dword, len:dword
     push esi
     push edi
 
-    ; å¤åˆ¶å˜é‡ååˆ°ç¼“å†²åŒº promptBuf
+    ; ¸´ÖÆ±äÁ¿Ãûµ½»º³åÇø promptBuf
     mov ecx, len    ; len = [ebp + 12]
     mov esi, vn     ; vn = [ebp + 8]
     mov edi, offset promptBuf
     cld
     rep movsb
 
-    ; å¤åˆ¶æç¤ºç¬¦ > åˆ°ç¼“å†²åŒº promptBuf
+    ; ¸´ÖÆÌáÊ¾·û > µ½»º³åÇø promptBuf
     mov ecx, lengthof PROMPT_DELIM
     mov esi, offset PROMPT_DELIM
     rep movsb
@@ -79,7 +79,7 @@ inputVar proc vn:dword, len:dword
     call dispmsg
     call readuid
 
-    ; ä¿è¯è¾“å…¥çš„æ•° > 7
+    ; ±£Ö¤ÊäÈëµÄÊı > 7
     cmp eax, 7
     ja GO
     mov eax, offset MSG_INPUT_ERR
@@ -89,14 +89,14 @@ inputVar proc vn:dword, len:dword
 GO:
     pop edi
     pop esi
-    ; å› ä¸ºé‡‡ç”¨ stdcall, æ‰€ä»¥ç”±è¢«è°ƒç”¨è€…æ¸…ç†å †æ ˆ
-    ; å› ä¸ºè¯¥è¿‡ç¨‹å¸¦å‚æ•°åˆ—è¡¨, æ‰€ä»¥è¿™é‡Œå¯ä»¥å†™ ret 8, ä¹Ÿå¯ä»¥å†™ ret, MASM ä¼šå°†åè€…è‡ªåŠ¨è½¬æ¢ä¸ºå‰è€…
+    ; ÒòÎª²ÉÓÃ stdcall, ËùÒÔÓÉ±»µ÷ÓÃÕßÇåÀí¶ÑÕ»
+    ; ÒòÎª¸Ã¹ı³Ì´ø²ÎÊıÁĞ±í, ËùÒÔÕâÀï¿ÉÒÔĞ´ ret 8, Ò²¿ÉÒÔĞ´ ret, MASM »á½«ºóÕß×Ô¶¯×ª»»ÎªÇ°Õß
     ret
 inputVar endp
 
-; æ±‚è¡¨è¾¾å¼ var4 = (var1 * 6) / (var2 - 7) + var3 çš„å€¼
-; è®¾ var1 ~ var4 ä¿å­˜åœ¨å…¨å±€æ•°ç»„å•å…ƒ var[0] ~ var[3] ä¸­, ä¸”å€¼ä¸ºå‡ > 7 çš„ unsigned long
-; è¿‡ç¨‹è¿”å› var4 çš„å€¼
+; Çó±í´ïÊ½ var4 = (var1 * 6) / (var2 - 7) + var3 µÄÖµ
+; Éè var1 ~ var4 ±£´æÔÚÈ«¾ÖÊı×éµ¥Ôª var[0] ~ var[3] ÖĞ, ÇÒÖµÎª¾ù > 7 µÄ unsigned long
+; ¹ı³Ì·µ»Ø var4 µÄÖµ
 evalExpr proto stdcall
 evalExpr proc
     push ebp
@@ -111,42 +111,42 @@ evalExpr proc
     sub ebx, 7                  ; var2 - 7
 
     xor edx, edx
-    div ebx                     ; (var1 * 6) / (var2 - 7), è¢«é™¤æ•°éšå«ä¸º edx:eax, å•†éšå«ä¸º eax
+    div ebx                     ; (var1 * 6) / (var2 - 7), ±»³ıÊıÒşº¬Îª edx:eax, ÉÌÒşº¬Îª eax
 
     mov ebx, var[2 * VARSZ]
     add eax, ebx                ; (var1 * 6) / (var2 - 7) + var3
 
-    mov var[3 * VARSZ], eax     ; ä¿å­˜åˆ° var4
+    mov var[3 * VARSZ], eax     ; ±£´æµ½ var4
 
     pop ebx
     leave
     ret
 evalExpr endp
 
-; ç¨‹åºå…¥å£
+; ³ÌĞòÈë¿Ú
 start:
     mov eax, offset MSG_TEST_BANNER
     call dispmsg
 
     mov eax, offset MSG_INPUT_PROMPT
     call dispmsg
-    ; ç”Ÿæˆ var çš„å˜é‡å var1 ~ var4, å¯¹åº”æ•°ç»„å•å…ƒ var[0] ~ var[3]
-    ; è¿™é‡Œä½¿ç”¨ bl (ebx), æ˜¯å› ä¸ºåœ¨å¾ªç¯ä¸­æœ‰å¯¹è¿‡ç¨‹ inputVar çš„è°ƒç”¨
-    ; æŒ‰ç…§ stdcall è°ƒç”¨çº¦å®š, eax, ecx, edx æ˜¯ caller-saved å¯„å­˜å™¨, è€Œ ebx æ˜¯ callee-saved å¯„å­˜å™¨
-    ; ä½¿ç”¨ ebx å¯ä»¥å…é™¤è¿‡ç¨‹è°ƒç”¨å‰å¯¹å¯„å­˜å™¨çš„ä¿å­˜
+    ; Éú³É var µÄ±äÁ¿Ãû var1 ~ var4, ¶ÔÓ¦Êı×éµ¥Ôª var[0] ~ var[3]
+    ; ÕâÀïÊ¹ÓÃ bl (ebx), ÊÇÒòÎªÔÚÑ­»·ÖĞÓĞ¶Ô¹ı³Ì inputVar µÄµ÷ÓÃ
+    ; °´ÕÕ stdcall µ÷ÓÃÔ¼¶¨, eax, ecx, edx ÊÇ caller-saved ¼Ä´æÆ÷, ¶ø ebx ÊÇ callee-saved ¼Ä´æÆ÷
+    ; Ê¹ÓÃ ebx ¿ÉÒÔÃâ³ı¹ı³Ìµ÷ÓÃÇ°¶Ô¼Ä´æÆ÷µÄ±£´æ
     xor ebx, ebx
 @@:
     mov al, bl
-    add al, '1'     ; å°†æ•´æ•° (0~3) è½¬æ¢ä¸ºå­—ç¬¦ (1~4)
+    add al, '1'     ; ½«ÕûÊı (0~3) ×ª»»Îª×Ö·û (1~4)
     mov varname[VARNAME_OFFSET], al
 
     ; showesp
-    ; invoke ç­‰ä»·äºè¿™ä¸‰æ¡æŒ‡ä»¤
+    ; invoke µÈ¼ÛÓÚÕâÈıÌõÖ¸Áî
     ; push 4
     ; push offset varname
     ; call inputVar
     invoke inputVar, offset varname, 4
-    ; showesp   ; æ£€æŸ¥å †æ ˆæ˜¯å¦å¹³è¡¡
+    ; showesp   ; ¼ì²é¶ÑÕ»ÊÇ·ñÆ½ºâ
     mov var[ebx * VARSZ], eax
 
     inc bl
@@ -155,7 +155,7 @@ start:
 
     call dispcrlf
 
-    ; è¾“å‡º var[0] ~ var[3]
+    ; Êä³ö var[0] ~ var[3]
     xor ebx, ebx
 @@:
     mov al, bl
@@ -181,7 +181,7 @@ start:
     call dispuid
 
     call dispcrlf
-    ; ç¨‹åºç»“æŸæç¤º
+    ; ³ÌĞò½áÊøÌáÊ¾
     mov eax, offset MSG_EXIT_PROMPT
     call dispmsg
     call readc

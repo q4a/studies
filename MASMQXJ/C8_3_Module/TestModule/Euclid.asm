@@ -1,4 +1,4 @@
-ï»¿; Euclid.asm
+; Euclid.asm
 ;
 
 ifndef __WIN64__
@@ -7,61 +7,61 @@ ifndef __WIN64__
 endif
 option casemap:none
 
-; å®šä¹‰ .asm çš„æž„å»ºè§„åˆ™
+; ¶¨Òå .asm µÄ¹¹½¨¹æÔò
 ;
-; æ‰“å¼€ .asm çš„å±žæ€§é¡µ
-; 1. é¦–å…ˆå°† General ä¸­çš„ Tool è®¾ç½®ä¸º Custom Build Tool
-; 2. ç„¶åŽåœ¨ Custom Build Step > General ä¸­è®¾ç½® Command Line:
-; Debug/Release é…ç½®å‡ç”Ÿæˆå«è°ƒè¯•ä¿¡æ¯ (/Zi) çš„ç›®æ ‡æ–‡ä»¶
+; ´ò¿ª .asm µÄÊôÐÔÒ³
+; 1. Ê×ÏÈ½« General ÖÐµÄ Tool ÉèÖÃÎª Custom Build Tool
+; 2. È»ºóÔÚ Custom Build Step > General ÖÐÉèÖÃ Command Line:
+; Debug/Release ÅäÖÃ¾ùÉú³Éº¬µ÷ÊÔÐÅÏ¢ (/Zi) µÄÄ¿±êÎÄ¼þ
 ; x86 (32bit):
 ; ml /nologo /c /Zi /Fl"$(IntDir)\$(InputName).lst" /FR"$(IntDir)\$(InputName).sbr" /Fo"$(IntDir)\$(InputName).obj" "$(InputPath)"
 ; x64 (64bit):
 ; ml64 /nologo /c /Zi /D"__WIN64__" /Fl"$(IntDir)\$(InputName).lst" /FR"$(IntDir)\$(InputName).sbr" /Fo"$(IntDir)\$(InputName).obj" "$(InputPath)"
 ;
-; è®¾ç½® Outputs:
+; ÉèÖÃ Outputs:
 ; $(IntDir)\$(InputName).obj
-; $(IntDir)\$(InputName).sbr    [å¦‚æžœä¸éœ€è¦ç”¨ /FR ç”Ÿæˆ Source Browser Information (.sbr), åˆ™ä¸éœ€å¡«å…¥æ­¤æ–‡ä»¶]
+; $(IntDir)\$(InputName).sbr    [Èç¹û²»ÐèÒªÓÃ /FR Éú³É Source Browser Information (.sbr), Ôò²»ÐèÌîÈë´ËÎÄ¼þ]
 ;
-; ä»¥ä¸Š ml ç¼–è¯‘å‘½ä»¤å°†åœ¨ä¸­é—´ç›®å½• $(IntDir) ç”Ÿæˆ:
+; ÒÔÉÏ ml ±àÒëÃüÁî½«ÔÚÖÐ¼äÄ¿Â¼ $(IntDir) Éú³É:
 ; 1. Object File (.obj)
 ; 2. Assembled Code Listing (.lst)
 ; 3. Source Browser Information (.sbr)
 ;
-; å…³äºŽ Source Browser Information (.sbr) å’Œ VS çš„ Object Browser
-; åœ¨ VS IDE ä¸­æž„å»ºæ—¶, ä¼šè‡ªåŠ¨è°ƒç”¨ bscmake å°†ä¸­é—´ç›®å½•ä¸­çš„ .sbr è½¬æ¢ä¸ºè¾“å‡ºç›®å½• $(OutDir) ä¸­çš„ .bsc
-; å°† .bsc æ‹–æ”¾åˆ° VS IDE ä¸­ä»¥æ‰“å¼€ Object Browser, å¯æŸ¥çœ‹ .bsc ä¸­çš„ç¬¦å·å¹¶è·³è½¬åˆ°ç›¸åº”æºç ä½ç½®
-; å½“æ‰§è¡Œå®Œ .sbr åˆ° .bsc çš„è‡ªåŠ¨è½¬æ¢åŽ, .sbr ä¼šå˜æˆç©ºæ–‡ä»¶
-; æœ‰æ—¶ .sbr åˆ° .bsc çš„è‡ªåŠ¨è½¬æ¢, ä¼šå› æ”¹å˜æž„å»ºå‘½ä»¤è€Œçªç„¶ä¸èµ·ä½œç”¨äº†, å³ä½¿æ”¹å›žåŽŸå…ˆçš„æž„å»ºå‘½ä»¤ä¹Ÿä¸èµ·ä½œç”¨
-; è¿™æ—¶å…³é—­ VS å¹¶åˆ é™¤æ‰€æœ‰ç”Ÿæˆæ–‡ä»¶å†é‡å¯èƒ½è§£å†³
-; .sbr/.bsc åœ¨è¯Šæ–­æ±‡ç¼–ç¨‹åºé—®é¢˜æ—¶, æ²¡æœ‰ .lst é‡è¦, æ‰€ä»¥ä¸€èˆ¬ä¸ç”¨ç”Ÿæˆ .sbr
+; ¹ØÓÚ Source Browser Information (.sbr) ºÍ VS µÄ Object Browser
+; ÔÚ VS IDE ÖÐ¹¹½¨Ê±, »á×Ô¶¯µ÷ÓÃ bscmake ½«ÖÐ¼äÄ¿Â¼ÖÐµÄ .sbr ×ª»»ÎªÊä³öÄ¿Â¼ $(OutDir) ÖÐµÄ .bsc
+; ½« .bsc ÍÏ·Åµ½ VS IDE ÖÐÒÔ´ò¿ª Object Browser, ¿É²é¿´ .bsc ÖÐµÄ·ûºÅ²¢Ìø×ªµ½ÏàÓ¦Ô´ÂëÎ»ÖÃ
+; µ±Ö´ÐÐÍê .sbr µ½ .bsc µÄ×Ô¶¯×ª»»ºó, .sbr »á±ä³É¿ÕÎÄ¼þ
+; ÓÐÊ± .sbr µ½ .bsc µÄ×Ô¶¯×ª»», »áÒò¸Ä±ä¹¹½¨ÃüÁî¶øÍ»È»²»Æð×÷ÓÃÁË, ¼´Ê¹¸Ä»ØÔ­ÏÈµÄ¹¹½¨ÃüÁîÒ²²»Æð×÷ÓÃ
+; ÕâÊ±¹Ø±Õ VS ²¢É¾³ýËùÓÐÉú³ÉÎÄ¼þÔÙÖØÆôÄÜ½â¾ö
+; .sbr/.bsc ÔÚÕï¶Ï»ã±à³ÌÐòÎÊÌâÊ±, Ã»ÓÐ .lst ÖØÒª, ËùÒÔÒ»°ã²»ÓÃÉú³É .sbr
 
 .code
 
-; MASM x86 åˆ° x64 çš„ç§»æ¤é—®é¢˜:
-; 1. MASM x64 æ±‡ç¼–å™¨ (ml64) ä¸æ”¯æŒæŒ‡ç¤º .386, .model flat, c
-; 2. MSVC x64 é»˜è®¤ä½¿ç”¨ x64 fastcall è°ƒç”¨çº¦å®š, è€Œ MSVC x86 é»˜è®¤ä½¿ç”¨ __cdecl è°ƒç”¨çº¦å®š
-;    MSVC x64 æŽ¥å—ä½†å¿½ç•¥ MSVC x86 çš„è°ƒç”¨çº¦å®šå…³é”®å­— __cdecl, __stdcall, __fastcall
-;    __cdecl å’Œ x64 fastcall åœ¨å‚æ•°ä¼ é€’ä¸Šçš„æœ€å¤§åŒºåˆ«æ˜¯:
-;    __cdecl ä½¿ç”¨æ ˆä¼ é€’å…¨éƒ¨å‚æ•°
-;    x64 fastcall ä½¿ç”¨ RCX, RDX, R8, R9 ä¼ é€’å‰ 4 ä¸ªä¸è¶…è¿‡ QWORD å¤§å°çš„å‚æ•°, å‰©ä½™å‚æ•°ä½¿ç”¨æ ˆä¼ é€’
+; MASM x86 µ½ x64 µÄÒÆÖ²ÎÊÌâ:
+; 1. MASM x64 »ã±àÆ÷ (ml64) ²»Ö§³ÖÖ¸Ê¾ .386, .model flat, c
+; 2. MSVC x64 Ä¬ÈÏÊ¹ÓÃ x64 fastcall µ÷ÓÃÔ¼¶¨, ¶ø MSVC x86 Ä¬ÈÏÊ¹ÓÃ __cdecl µ÷ÓÃÔ¼¶¨
+;    MSVC x64 ½ÓÊÜµ«ºöÂÔ MSVC x86 µÄµ÷ÓÃÔ¼¶¨¹Ø¼ü×Ö __cdecl, __stdcall, __fastcall
+;    __cdecl ºÍ x64 fastcall ÔÚ²ÎÊý´«µÝÉÏµÄ×î´óÇø±ðÊÇ:
+;    __cdecl Ê¹ÓÃÕ»´«µÝÈ«²¿²ÎÊý
+;    x64 fastcall Ê¹ÓÃ RCX, RDX, R8, R9 ´«µÝÇ° 4 ¸ö²»³¬¹ý QWORD ´óÐ¡µÄ²ÎÊý, Ê£Óà²ÎÊýÊ¹ÓÃÕ»´«µÝ
 ;
-; ä¸¤ç§è§£å†³æ–¹æ³•:
-; 1. ä¸º x86, x64 åˆ†åˆ«ç¼–å†™ä¸¤ä»½ .asm æ±‡ç¼–ç¨‹åº
-; 2. åˆ©ç”¨æ¡ä»¶æ±‡ç¼–, é€‚é… __cdecl å’Œ x64 fastcall ä¸¤ç§è°ƒç”¨çº¦å®š, ä»¥åŠ MASM x86/x64 ä¹‹é—´çš„å·®å¼‚
+; Á½ÖÖ½â¾ö·½·¨:
+; 1. Îª x86, x64 ·Ö±ð±àÐ´Á½·Ý .asm »ã±à³ÌÐò
+; 2. ÀûÓÃÌõ¼þ»ã±à, ÊÊÅä __cdecl ºÍ x64 fastcall Á½ÖÖµ÷ÓÃÔ¼¶¨, ÒÔ¼° MASM x86/x64 Ö®¼äµÄ²îÒì
 ;
-; å‚è€ƒ:
+; ²Î¿¼:
 ; x64 software conventions
 ; https://docs.microsoft.com/en-us/cpp/build/x64-software-conventions
 ; .MODEL
 ; https://docs.microsoft.com/en-us/cpp/assembler/masm/dot-model
-; è¿™é‡Œæœ‰æ¡ä»¶æ±‡ç¼–çš„ç¤ºä¾‹
+; ÕâÀïÓÐÌõ¼þ»ã±àµÄÊ¾Àý
 
-; ä½¿ç”¨æ¬§å‡ é‡Œå¾—ç®—æ³• (Euclid's Algorithm) æ±‚æœ€å¤§å…¬çº¦æ•°:
+; Ê¹ÓÃÅ·¼¸ÀïµÃËã·¨ (Euclid's Algorithm) Çó×î´ó¹«Ô¼Êý:
 ; Repeatedly subtracting the smaller number from the larger number until zero is reached.
 ; The number remaining is the greatest common divisor.
 ifdef __WIN64__
-; MASM x64 ä¸­ä¸è¦å£°æ˜Žå‚æ•°åˆ—è¡¨, å¦åˆ™ä¼šåƒ MASM x86 ä¸€æ ·è‡ªåŠ¨ç”Ÿæˆå»ºç«‹/æ¸…ç†æ ˆå¸§çš„ prolog/epilog çš„ä»£ç 
-; è™½ç„¶åœ¨ MASM x64 ä¸­ç”Ÿæˆæ ˆå¸§å¹¶æ²¡æœ‰é”™è¯¯, ä½†å¯¹äºŽåªæœ‰ [å°‘é‡å‚æ•° + çŸ­å°å‡½æ•°ä½“] çš„å‡½æ•°è€Œè¨€å´æ˜¯ä¸å¿…è¦çš„
+; MASM x64 ÖÐ²»ÒªÉùÃ÷²ÎÊýÁÐ±í, ·ñÔò»áÏñ MASM x86 Ò»Ñù×Ô¶¯Éú³É½¨Á¢/ÇåÀíÕ»Ö¡µÄ prolog/epilog µÄ´úÂë
+; ËäÈ»ÔÚ MASM x64 ÖÐÉú³ÉÕ»Ö¡²¢Ã»ÓÐ´íÎó, µ«¶ÔÓÚÖ»ÓÐ [ÉÙÁ¿²ÎÊý + ¶ÌÐ¡º¯ÊýÌå] µÄº¯Êý¶øÑÔÈ´ÊÇ²»±ØÒªµÄ
 Euclid proc
     mov eax, edx
 else
@@ -77,7 +77,7 @@ endif
 NOSWAP:
     sub ecx, eax
     jnz @B
-    ; æœ€å¤§å…¬çº¦æ•°ä¿ç•™åœ¨ä½œä¸ºè¿”å›žå€¼çš„ eax ä¸­
+    ; ×î´ó¹«Ô¼Êý±£ÁôÔÚ×÷Îª·µ»ØÖµµÄ eax ÖÐ
     ret
 Euclid endp
 

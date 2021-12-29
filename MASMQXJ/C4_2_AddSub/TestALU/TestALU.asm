@@ -1,8 +1,8 @@
-ï»¿; TestALU.asm
+; TestALU.asm
 ;
 
 ; .686, .model flat, stdcall
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 include io32.inc
 
 .data
@@ -17,49 +17,49 @@ include io32.inc
 
 .code
 start:
-    ; æµ‹è¯• add æŒ‡ä»¤
+    ; ²âÊÔ add Ö¸Áî
     mov eax, offset MSG_TEST_ADD
     call dispmsg
     mov eax, 0AAFF7348H
-    add al, 27H         ; 8bit åŠ æ³•
+    add al, 27H         ; 8bit ¼Ó·¨
     call disprf
     call disphb
     call dispcrlf
 
-    add ax, 3FFFH       ; 16bit åŠ æ³•
+    add ax, 3FFFH       ; 16bit ¼Ó·¨
     call disprf
     call disphw
     call dispcrlf
 
-    add eax, 88000000H   ; 32bit åŠ æ³•
+    add eax, 88000000H   ; 32bit ¼Ó·¨
     call disprf
     call disphd
     call dispcrlf
 
-    ; æµ‹è¯• sub æŒ‡ä»¤
+    ; ²âÊÔ sub Ö¸Áî
     mov eax, offset MSG_TEST_SUB
     call dispmsg
     mov eax, 0AAFF7348H
-    sub al, 27H         ; 8bit å‡æ³•
+    sub al, 27H         ; 8bit ¼õ·¨
     call disprf
     call disphb
     call dispcrlf
 
-    sub ax, 3FFFH       ; 16bit å‡æ³•
+    sub ax, 3FFFH       ; 16bit ¼õ·¨
     call disprf
     call disphw
     call dispcrlf
 
-    sub eax, 0BB000000H ; 32bit å‡æ³•
+    sub eax, 0BB000000H ; 32bit ¼õ·¨
     call disprf
     call disphd
     call dispcrlf
 
-    ; æµ‹è¯•å¤§å°å†™å­—æ¯è½¬æ¢
+    ; ²âÊÔ´óĞ¡Ğ´×ÖÄ¸×ª»»
     mov eax, offset MSG_TEST_CASECONVERT
     call dispmsg
 
-    ; å¤§å†™å­—æ¯è½¬æ¢ä¸ºå°å†™, ä½¿ç”¨ add
+    ; ´óĞ´×ÖÄ¸×ª»»ÎªĞ¡Ğ´, Ê¹ÓÃ add
     mov eax, offset MSG_I_UPPER
     call dispmsg
     call readc
@@ -72,7 +72,7 @@ start:
     call dispc
     call dispcrlf
 
-    ; å°å†™å­—æ¯è½¬æ¢ä¸ºå¤§å†™, ä½¿ç”¨ sub
+    ; Ğ¡Ğ´×ÖÄ¸×ª»»Îª´óĞ´, Ê¹ÓÃ sub
     mov eax, offset MSG_I_LOWER
     call dispmsg
     call readc
@@ -84,7 +84,7 @@ start:
     sub al, 20h
     call dispc
 
-    ; ç¨‹åºç»“æŸæç¤º
+    ; ³ÌĞò½áÊøÌáÊ¾
     call dispcrlf
     mov eax, offset MSG_EXIT_PROMPT
     call dispmsg

@@ -1,12 +1,12 @@
-ï»¿; TestConst.asm
+; TestConst.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
 .data
-    ; å­—ç¬¦ä¸²å¸¸é‡é‡Œç”¨ !!!! è¡¨ç¤ºä¸€ä¸ª !
+    ; ×Ö·û´®³£Á¿ÀïÓÃ !!!! ±íÊ¾Ò»¸ö !
     MSG_HELLO equ <'Hello World!!!!'>
     CR = 0Dh
     LF = 0Ah

@@ -1,7 +1,7 @@
-ï»¿; TestALU.asm
+; TestALU.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
@@ -26,7 +26,7 @@ include io32.inc
 
 .code
 start:
-    ; æµ‹è¯• inc æŒ‡ä»¤
+    ; ²âÊÔ inc Ö¸Áî
     mov eax, offset MSG_TEST_INC
     call dispmsg
 
@@ -42,7 +42,7 @@ start:
     call dispmsg
     call dispcrlf
 
-    ; è®¡ç®—å­—ç¬¦ä¸² strbuf é•¿åº¦, ä½¿ç”¨ inc
+    ; ¼ÆËã×Ö·û´® strbuf ³¤¶È, Ê¹ÓÃ inc
     xor ecx, ecx
 LOOP1:
     mov al, strbuf[ecx]
@@ -57,12 +57,12 @@ END_LOOP1:
     call dispuid
     call dispcrlf
 
-    ; æµ‹è¯• dec æŒ‡ä»¤
+    ; ²âÊÔ dec Ö¸Áî
     mov eax, offset MSG_TEST_DEC
     call dispmsg
 
-    ; ä»åå‘å‰éå†å­—ç¬¦ä¸² strbuf, ä½¿ç”¨ dec
-    lea esi, strbuf[ecx - 1]    ; ecx ä¿å­˜æœ‰ strbuf é•¿åº¦
+    ; ´ÓºóÏòÇ°±éÀú×Ö·û´® strbuf, Ê¹ÓÃ dec
+    lea esi, strbuf[ecx - 1]    ; ecx ±£´æÓĞ strbuf ³¤¶È
 LOOP2:
     mov al, byte ptr [esi]
     call dispc
@@ -75,7 +75,7 @@ LOOP2:
 END_LOOP2:
     call dispcrlf
 
-    ; æµ‹è¯• neg æŒ‡ä»¤
+    ; ²âÊÔ neg Ö¸Áî
     mov eax, offset MSG_TEST_NEG
     call dispmsg
 
@@ -104,7 +104,7 @@ END_LOOP2:
     mov al, bl
     call dispsib
 
-    ; ç¨‹åºç»“æŸæç¤º
+    ; ³ÌĞò½áÊøÌáÊ¾
     call dispcrlf
     mov eax, offset MSG_EXIT_PROMPT
     call dispmsg

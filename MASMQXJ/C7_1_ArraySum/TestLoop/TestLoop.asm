@@ -1,7 +1,7 @@
-ï»¿; TestLoop.asm
+; TestLoop.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
@@ -14,7 +14,7 @@ include io32.inc
 
 .code
 start:
-    ; æ•°ç»„æ±‚å’Œç¨‹åº
+    ; Êı×éÇóºÍ³ÌĞò
     mov eax, offset MSG_TEST_ARRSUM
     call dispmsg
 
@@ -33,7 +33,7 @@ L1:
     call dispsid
     call dispcrlf
 
-    ; ç¨‹åºç»“æŸæç¤º
+    ; ³ÌĞò½áÊøÌáÊ¾
     mov eax, offset MSG_EXIT_PROMPT
     call dispmsg
     call readc

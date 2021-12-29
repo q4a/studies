@@ -1,7 +1,7 @@
-ï»¿; TestAddr.asm
+; TestAddr.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
@@ -11,14 +11,14 @@ include io32.inc
 
 .code
 start:
-    ; ä½¿ç”¨å­˜å‚¨å™¨çš„å¯„å­˜å™¨ç›¸å¯¹å¯»å€, æ‹·è´å­—ç¬¦ä¸²
+    ; Ê¹ÓÃ´æ´¢Æ÷µÄ¼Ä´æÆ÷Ïà¶ÔÑ°Ö·, ¿½±´×Ö·û´®
     mov ecx, lengthof srcmsg
     mov ebx, 0
 again:
     mov al, srcmsg[ebx]
     mov dstmsg[ebx], al
     add ebx, 1
-    loop again  ; ecx è‡ªå‡ 1, å½“ ecx == 0 ç»“æŸå¾ªç¯
+    loop again  ; ecx ×Ô¼õ 1, µ± ecx == 0 ½áÊøÑ­»·
 
     mov eax, offset dstmsg
     call dispmsg

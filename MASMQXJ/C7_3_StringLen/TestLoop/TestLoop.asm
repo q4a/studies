@@ -1,7 +1,7 @@
-ï»¿; TestLoop.asm
+; TestLoop.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
@@ -26,7 +26,7 @@ displen proc
 displen endp
 
 start:
-    ; è®¡ç®— 0 ç»“å°¾å­—ç¬¦ä¸²çš„é•¿åº¦
+    ; ¼ÆËã 0 ½áÎ²×Ö·û´®µÄ³¤¶È
     mov eax, offset MSG_TEST_STRLEN
     call dispmsg
 
@@ -43,7 +43,7 @@ L2:
     call displen
     call dispcrlf
 
-    ; ç¨‹åºç»“æŸæç¤º
+    ; ³ÌĞò½áÊøÌáÊ¾
     mov eax, offset MSG_EXIT_PROMPT
     call dispmsg
     call readc

@@ -1,7 +1,7 @@
-ï»¿; TestBranch.asm
+; TestBranch.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
@@ -16,11 +16,11 @@ start:
     mov eax, offset MSG_TEST_MSB
     call dispmsg
 
-    ; ä½¿ç”¨åŒåˆ†æ”¯ç»“æ„, æ˜¾ç¤ºæ•°æ®çš„æœ€é«˜ä½ MSB (Most Significant Bit)
+    ; Ê¹ÓÃË«·ÖÖ§½á¹¹, ÏÔÊ¾Êı¾İµÄ×î¸ßÎ» MSB (Most Significant Bit)
     mov ebx, dvar
-    shl ebx, 1      ; MSB ç§»å…¥ CF
-    jc MSB_1        ; CF = 1 è·³è½¬
-    mov al, '0'     ; CF = 0 æ—¶, é¡ºåºæ‰§è¡Œåˆ°è¿™é‡Œ
+    shl ebx, 1      ; MSB ÒÆÈë CF
+    jc MSB_1        ; CF = 1 Ìø×ª
+    mov al, '0'     ; CF = 0 Ê±, Ë³ĞòÖ´ĞĞµ½ÕâÀï
     jmp SHOW
 MSB_1:
     mov al, '1'
@@ -28,7 +28,7 @@ SHOW:
     call dispc
     call dispcrlf
 
-    ; ç¨‹åºç»“æŸæç¤º
+    ; ³ÌĞò½áÊøÌáÊ¾
     mov eax, offset MSG_EXIT_PROMPT
     call dispmsg
     call readc
