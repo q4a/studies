@@ -1,16 +1,16 @@
-ï»¿; Hello.asm
+; Hello.asm
 ;
 
-; IO å­ç¨‹åºå£°æ˜
+; IO ×Ó³ÌĞòÉùÃ÷
 ; .686, .model flat, stdcall
 include io32.inc
 
 .data
-    msg byte 'Hello Assembly!', 0Dh, 0Ah, 0 ; å®šä¹‰å­—ç¬¦ä¸². 0Dh, 0Ah, 0 å³åºåˆ— CR LF \0
+    msg byte 'Hello Assembly!', 0Dh, 0Ah, 0 ; ¶¨Òå×Ö·û´®. 0Dh, 0Ah, 0 ¼´ĞòÁĞ CR LF \0
 
 .code
 start:
-    mov eax, offset msg                     ; è°ƒç”¨å­ç¨‹åº dispmsg æ˜¾ç¤º
+    mov eax, offset msg                     ; µ÷ÓÃ×Ó³ÌĞò dispmsg ÏÔÊ¾
     call dispmsg
 
     exit 0
