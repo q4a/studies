@@ -4,7 +4,7 @@
 //////////////////////////////////////////////////////////////
 
 #include <windows.h>
-#include <d3dx9.h>
+#include "d3dx9.h"
 #include <fstream>
 #include "obb.h"
 
